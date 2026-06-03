@@ -2,7 +2,7 @@
 export const translations: Record<string, Record<string, unknown>> = {
   es: {
     banner: {
-      text: "↗ Portfolio de FranGuh → fran.plynte.com",
+      text: "↗ Portfolio de FranGuh → franguh.plynte.com",
     },
     navbar: {
       inicio: "Inicio",
@@ -94,7 +94,7 @@ export const translations: Record<string, Record<string, unknown>> = {
   },
   en: {
     banner: {
-      text: "↗ FranGuh's Portfolio → fran.plynte.com",
+      text: "↗ FranGuh's Portfolio → franguh.plynte.com",
     },
     navbar: {
       inicio: "Home",

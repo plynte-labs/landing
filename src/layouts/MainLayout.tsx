@@ -8,7 +8,7 @@ const MaintainerBanner = () => {
   const { t } = useLanguage();
   return (
     <a
-      href="https://fran.plynte.com"
+      href="https://franguh.plynte.com"
       className="maintainer-banner"
       target="_blank"
       rel="noopener noreferrer"

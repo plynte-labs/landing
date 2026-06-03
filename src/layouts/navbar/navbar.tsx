@@ -58,14 +58,6 @@ export function Navbar() {
             );
           })}
         </ul>
-        <a
-          href="https://fran.plynte.com"
-          className="navbar-maintainer"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {t("navbar.maintainer")}
-        </a>
         <LanguageSwitcher />
       </div>
     </nav>
