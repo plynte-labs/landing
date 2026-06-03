@@ -1,18 +1,29 @@
 import { Outlet } from "react-router-dom";
 import { Navbar } from "./navbar/navbar";
 import { LanguageProvider } from "../contexts/LanguageContext";
+import { useLanguage } from "../contexts/LanguageContext";
+import "./MainLayout.css";
 
-/**
- * Refactor: De Pattern "Children" a "Outlet Pattern".
- * El Layout ahora actúa como un Wrapper estructural. 
- * No necesita props de children, ya que gestiona el renderizado de rutas hijas vía Outlet.
- */
+const MaintainerBanner = () => {
+  const { t } = useLanguage();
+  return (
+    <a
+      href="https://fran.plynte.com"
+      className="maintainer-banner"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {t("banner.text")}
+    </a>
+  );
+};
+
 export const MainLayout = () => {
   return (
     <LanguageProvider>
+      <MaintainerBanner />
       <Navbar />
       <main>
-        {/* El Outlet es el placeholder donde se renderizarán las rutas hijas definidas en AppRouter */}
         <Outlet />
       </main>
     </LanguageProvider>

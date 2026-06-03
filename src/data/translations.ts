@@ -1,6 +1,9 @@
 // src/data/translations.ts
 export const translations: Record<string, Record<string, unknown>> = {
   es: {
+    banner: {
+      text: "↗ Portfolio de FranGuh → fran.plynte.com",
+    },
     navbar: {
       inicio: "Inicio",
       proyectos: "Proyectos",
@@ -90,6 +93,9 @@ export const translations: Record<string, Record<string, unknown>> = {
     },
   },
   en: {
+    banner: {
+      text: "↗ FranGuh's Portfolio → fran.plynte.com",
+    },
     navbar: {
       inicio: "Home",
       proyectos: "Projects",

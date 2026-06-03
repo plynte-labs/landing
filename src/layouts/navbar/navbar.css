@@ -5,7 +5,7 @@
   background-color: transparent;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
   position: fixed;
-  top: 0;
+  top: 32px;
   left: 0;
   padding: var(--space-4) var(--space-8);
   z-index: 10;
@@ -75,18 +75,26 @@
   gap: var(--space-4);
 }
 
-/* Optional: hide menu in mobile if you don't need it */
+/* Mobile: compact layout, show everything */
 @media (max-width: 920px) {
   .navbar {
-    padding: var(--space-8) var(--space-8);
-  }
-
-  .navbar-menu {
-    display: none;
+    padding: var(--space-2) var(--space-4);
   }
 
   .navbar-right {
-    display: none;
+    gap: var(--space-2);
+  }
+
+  .navbar-menu {
+    gap: var(--space-4);
+  }
+
+  .navbar-item a {
+    font-size: var(--font-size-sm);
+  }
+
+  .navbar-maintainer {
+    font-size: 0.7rem;
   }
 }
 

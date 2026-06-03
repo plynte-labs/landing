@@ -1,3 +1,8 @@
 .landing {
   /* Container for the single-page landing layout */
 }
+
+/* Scroll targets offset to account for fixed banner + navbar */
+.landing > div[id] {
+  scroll-margin-top: 100px;
+}

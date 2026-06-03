@@ -1,0 +1,22 @@
+.maintainer-banner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 6px var(--space-4);
+  background: var(--brand-green, #6FF073);
+  color: #000000;
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+  transition: background 0.2s ease;
+}
+
+.maintainer-banner:hover {
+  background: var(--brand-green-hover, #4CAF50);
+}
