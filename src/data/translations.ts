@@ -6,6 +6,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       proyectos: "Proyectos",
       contribuir: "Contribuir",
       langToggle: "EN",
+      maintainer: "por FranGuh",
     },
     hero: {
       tagline:
@@ -94,6 +95,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       proyectos: "Projects",
       contribuir: "Contribute",
       langToggle: "ES",
+      maintainer: "by FranGuh",
     },
     hero: {
       tagline:

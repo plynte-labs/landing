@@ -56,6 +56,19 @@
   font-weight: 500;
 }
 
+.navbar-maintainer {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  font-size: var(--font-size-xs);
+  font-style: italic;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar-maintainer:hover {
+  color: var(--brand-green, #6FF073);
+}
+
 .navbar-right {
   display: flex;
   align-items: center;
