@@ -139,14 +139,56 @@ export const translations: Record<string, any> = {
       skillsSpan1: "mis ideas",
       skillsSpan2: "mis aprendizajes",
     },
-    notFound: {
-      title: "Esta página no existe",
-      description: "La ruta solicitada no corresponde a ningún recurso disponible en el portfolio.",
-      urlInfo: "La URL {path} no corresponde a ningún recurso válido.",
-      subInfo: "Es posible que escribiste mal la dirección o que la página fue eliminada.",
-      btnHome: "Volver al Inicio",
-      btnAbout: "Ir a Sobre Mí",
-    },
+      hero: {
+        tagline: "Un laboratorio de software open-source dedicado a crear herramientas de productividad de alto rendimiento e infraestructura de audio local impulsada por IA, para artistas y streamers bajo licencia MIT.",
+        subtagline: "Forgeá, creá, compartí. Sin ataduras.",
+        cta: "Explorar Proyectos",
+        mitBadge: "MIT Licensed",
+      },
+      ecosystem: {
+        heading: "Nuestros Proyectos",
+        "brick-draw": {
+          name: "Brick Draw",
+          desc: "Aplicación de dibujo de alto rendimiento construida con TypeScript, Canvas y React. Diseñada para artistas y streamers que necesitan herramientas rápidas y sin fricción.",
+        },
+        liveaudio: {
+          name: "LiveAudio",
+          desc: "Procesamiento de audio en tiempo real con Whisper, Python e integración OBS. Infraestructura de audio local impulsada por IA para streaming en vivo.",
+        },
+        voiceai: {
+          name: "VoiceAI",
+          desc: "Asistente de voz local con Ollama, QwenTTS e integración Twitch. Procesamiento de lenguaje natural 100% local para streamers.",
+        },
+        comingSoon: "Próximamente",
+        viewOnGithub: "Ver en GitHub",
+      },
+      architecture: {
+        heading: "Cómo Construimos",
+        "local-first": {
+          title: "Local First",
+          desc: "Todo corre en tu máquina. Sin dependencia de la nube, sin latencia, privacidad total.",
+        },
+        "mit-license": {
+          title: "Licencia MIT",
+          desc: "Todos nuestros proyectos son open source bajo licencia MIT. Usalos, forkearlos, construí con ellos.",
+        },
+        "ci-cd": {
+          title: "CI/CD",
+          desc: "Pruebas automatizadas, builds y pipelines de despliegue para cada proyecto.",
+        },
+        "hardware-acceleration": {
+          title: "Aceleración por Hardware",
+          desc: "Aprovechando GPU y hardware de IA local para máximo rendimiento.",
+        },
+      },
+      notFound: {
+        title: "Esta página no existe",
+        description: "La ruta solicitada no corresponde a ningún recurso disponible en el portfolio.",
+        urlInfo: "La URL {path} no corresponde a ningún recurso válido.",
+        subInfo: "Es posible que escribiste mal la dirección o que la página fue eliminada.",
+        btnHome: "Volver al Inicio",
+        btnAbout: "Ir a Sobre Mí",
+      },
     featureSelector: {
       perfil: { label: "Perfil", desc: "Ingeniero en Sistemas Computacionales. Enfoque en desarrollo de software y resolución de problemas técnicos." },
       frontend: { label: "Frontend", desc: "Desarrollo de interfaces con React, JavaScript, TypeScript, HTML y CSS." },
@@ -295,14 +337,56 @@ export const translations: Record<string, any> = {
       skillsSpan1: "my ideas",
       skillsSpan2: "my learnings",
     },
-    notFound: {
-      title: "This page does not exist",
-      description: "The requested path does not correspond to any resource available in the portfolio.",
-      urlInfo: "The URL {path} does not correspond to any valid resource.",
-      subInfo: "You might have typed the address wrong or the page was deleted.",
-      btnHome: "Back to Home",
-      btnAbout: "Go to About Me",
-    },
+      hero: {
+        tagline: "An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure, tools for artists and streamers under the MIT license.",
+        subtagline: "Forge, create, share. No strings attached.",
+        cta: "Explore Projects",
+        mitBadge: "MIT Licensed",
+      },
+      ecosystem: {
+        heading: "Our Projects",
+        "brick-draw": {
+          name: "Brick Draw",
+          desc: "High-performance drawing app built with TypeScript, Canvas, and React. Designed for artists and streamers who need fast, frictionless tools.",
+        },
+        liveaudio: {
+          name: "LiveAudio",
+          desc: "Real-time audio processing with Whisper, Python, and OBS integration. Local AI-driven audio infrastructure for live streaming.",
+        },
+        voiceai: {
+          name: "VoiceAI",
+          desc: "Local voice assistant powered by Ollama, QwenTTS, and Twitch integration. 100% local natural language processing for streamers.",
+        },
+        comingSoon: "Coming Soon",
+        viewOnGithub: "View on GitHub",
+      },
+      architecture: {
+        heading: "How We Build",
+        "local-first": {
+          title: "Local First",
+          desc: "Everything runs on your machine. No cloud dependency, no latency, full privacy.",
+        },
+        "mit-license": {
+          title: "MIT License",
+          desc: "All our projects are open source under the MIT license. Use them, fork them, build with them.",
+        },
+        "ci-cd": {
+          title: "CI/CD",
+          desc: "Automated testing, building, and deployment pipelines for every project.",
+        },
+        "hardware-acceleration": {
+          title: "Hardware Acceleration",
+          desc: "Leveraging GPU and local AI hardware for maximum performance.",
+        },
+      },
+      notFound: {
+        title: "This page does not exist",
+        description: "The requested path does not correspond to any resource available in the portfolio.",
+        urlInfo: "The URL {path} does not correspond to any valid resource.",
+        subInfo: "You might have typed the address wrong or the page was deleted.",
+        btnHome: "Back to Home",
+        btnAbout: "Go to About Me",
+      },
     featureSelector: {
       perfil: { label: "Profile", desc: "Computer Systems Engineer. Focused on software development and technical problem solving." },
       frontend: { label: "Frontend", desc: "UI development with React, JavaScript, TypeScript, HTML, and CSS." },
