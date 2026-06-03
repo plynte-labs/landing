@@ -30,7 +30,7 @@
   height: 100dvh;
   overflow: hidden;
 /* #fff9c4, #ffb300, #ef6c00, #4e342e */
-  background: linear-gradient(270deg, #ff8f85, #ffb300, #ef6c00, #4e342e);
+  background: linear-gradient(270deg, #6FF073, #4CAF50, #173218, #0a1a0a);
   background-size: 400% 400%;
   animation: bg-pan-pulse 20s ease-in-out infinite;
 }
@@ -49,7 +49,7 @@
 .particle {
   position: absolute;
   /* #ffc107 */
-  background-color: #71021c;
+  background-color: #6FF073;
   border-radius: 50%;
   animation-name: floatUp;
   animation-timing-function: ease-in-out;

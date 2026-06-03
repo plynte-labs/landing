@@ -3,3 +3,19 @@ export interface User {
     name: string;
     email: string;
 }
+
+export interface Project {
+    key: string;
+    name: string;
+    description: string;
+    github?: string;
+    status: 'live' | 'coming-soon';
+    tech: string[];
+}
+
+export interface Pillar {
+    key: string;
+    icon: string;
+    title: string;
+    description: string;
+}

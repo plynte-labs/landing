@@ -5,17 +5,22 @@
   --color-text: #1a1a1a;
   --color-text-muted: #666;
   --color-text-light: #ffffff;
-  --color-primary: #ff8903;
-  --color-primary-hover: #e67a00;
-  --color-accent: #ff9900;
+  --color-primary: #6FF073;
+  --color-primary-hover: #4CAF50;
+  --color-accent: #6FF073;
   --color-danger: #ff4d4d;
   --color-brand-green: #13da2e;
   --color-brand-blue: #0CFADA;
   --color-brand-blue-2: #0081A7;
   --color-brand-brown: #8B5E3C;
   --color-brand-brown-2: #BA5F38;
-  --color-brand-orange: #FA540C;
-  --color-brand-orange-2: #FF8903;
+  /* Green brand tokens */
+  --brand-green: #6FF073;
+  --brand-green-hover: #4CAF50;
+  --brand-green-glow: rgba(111, 240, 115, 0.3);
+  --glass-bg: rgba(0, 0, 0, 0.3);
+  --glass-border: rgba(111, 240, 115, 0.08);
+  --glass-blur: blur(12px);
 
   /* Superficies oscuras */
   --color-dark-bg: #0a0a0a;

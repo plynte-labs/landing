@@ -15,7 +15,7 @@
 }
 
 ::selection {
-  background-color: var(--color-bg-primary);
+  background-color: rgba(111, 240, 115, 0.30);
   color: var(--color-text-secondary);
 }
 
@@ -35,7 +35,7 @@ body, p, span, .text {
 /* ===== Scrollbar Modernizado ===== */
 * {
   scrollbar-width: thin;
-  scrollbar-color: var(--color-primary, #ff9900) #0d0d0d;
+  scrollbar-color: #6FF073 #0d0d0d;
 }
 
 ::-webkit-scrollbar {
@@ -45,6 +45,6 @@ body, p, span, .text {
   background: #0d0d0d;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-primary, #ff9900);
+  background-color: #6FF073;
   border-radius: 10px;
 }

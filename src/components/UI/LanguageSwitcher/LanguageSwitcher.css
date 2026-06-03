@@ -24,12 +24,12 @@
 }
 
 .LanguageSwitcher__btn:hover {
-  border-color: var(--color-brand-orange-2);
+  border-color: var(--brand-green);
   background-color: var(--color-dark-card);
 }
 
 .LanguageSwitcher__btn:focus-visible {
-  outline: 2px solid var(--color-brand-orange-2);
+  outline: 2px solid var(--brand-green);
   outline-offset: 2px;
 }
 
