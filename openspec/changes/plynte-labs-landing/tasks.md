@@ -52,17 +52,17 @@ Chain strategy: pending
 
 - [x] **T8**: Create `src/features/ArchitectureSection/ArchitectureSection.tsx` + `ArchitectureSection.css` — 4 pillar GlassCards from `orgData.pillars[]`: icon + i18n title + description. `whileInView` fade-left. Connecting lines/blueprint aesthetic. Dependencies: T1, T3, T4. Verify: 4 cards with icons + text, fade-in animation triggers once.
 
-- [ ] **T9**: Create `src/features/ContributeSection/ContributeSection.tsx` + `ContributeSection.css` — numbered workflow steps (Fork→Branch→PR→Review), `<pre>` conventional commits snippet, GitHub org link + Discord link, Code of Conduct reference. Dependencies: T1. Verify: 4 steps visible, commit snippet styled, links open new tabs.
+- [x] **T9**: Create `src/features/ContributeSection/ContributeSection.tsx` + `ContributeSection.css` — numbered workflow steps (Fork→Branch→PR→Review), `<pre>` conventional commits snippet, GitHub org link (no Discord, no Code of Conduct — per PR 3 spec). Dependencies: T1. Verify: 4 steps visible, commit snippet styled, link opens new tab.
 
-- [ ] **T10**: Create `src/features/MissionSection/MissionSection.tsx` + `MissionSection.css` — mission statement paragraph, explicit MIT license mention, maintainer info (name + role, 1-2 lines), subtle personal GitHub/LinkedIn links. Dependencies: T1. Verify: text renders, MIT visible, maintainer links are secondary-style.
+- [x] **T10**: Create `src/features/MissionSection/MissionSection.tsx` + `MissionSection.css` — mission statement paragraph, explicit MIT license mention, maintainer info (name + role, 1-2 lines), subtle personal GitHub link. Dependencies: T1. Verify: text renders, MIT visible, maintainer link is secondary-style.
 
 ---
 
 ## Phase 3: Integration (MODIFY)
 
-- [ ] **T11**: Rewrite `src/data/translations.ts` — keep navbar.* key structure with org labels, add hero.* / ecosystem.* / architecture.* / contribute.* / mission.* / footer.* keys with complete ES+EN translations. Remove home/about/story/philosophy/insights/contact/portfolio/featureSelector keys. Keep notFound.* for 404 page. Dependencies: T6-T10 (know which keys features consume). Verify: `t("hero.tagline")` returns string in both languages, `t("home.intro")` returns raw key fallback.
+- [x] **T11**: Rewrite `src/data/translations.ts` — keep navbar.* key structure with org labels, add hero.* / ecosystem.* / architecture.* / contribute.* / mission.* / footer.* / seo.* keys with complete ES+EN translations. Removed home/about/story/philosophy/insights/contact/portfolio/featureSelector keys. Replaced notFound.* with org 404 copy. Dependencies: T6-T10 (know which keys features consume). Verify: `t("hero.tagline")` returns string in both languages, `t("home.intro")` returns raw key fallback.
 
-- [ ] **T12**: Create `src/pages/LandingPage/LandingPage.tsx` + `LandingPage.css` — renders all 5 sections in order: HeroSection, EcosystemSection, ArchitectureSection, ContributeSection, MissionSection. Each section receives a `ref` for scrollIntoView navigation. Dependencies: T6-T10. Verify: landing page renders, all sections visible in correct order.
+- [x] **T12**: Create `src/pages/LandingPage/LandingPage.tsx` + `LandingPage.css` — renders all 5 sections in order: HeroSection, EcosystemSection, ArchitectureSection, ContributeSection, MissionSection. Each section receives a `ref` for scrollIntoView navigation. Dependencies: T6-T10. Verify: landing page renders, all sections visible in correct order.
 
 - [ ] **T13**: Modify `src/routes/AppRouter.tsx` — replace 5 routes with single `<LandingPage>` at `"/"`. Keep 404 wildcard catching `*`. Keep BrowserRouter, Suspense, ScrollToTop. Dependencies: T12. Verify: `"/"` renders landing, `"/anything"` renders 404.
 
