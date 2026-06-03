@@ -19,7 +19,7 @@ const HeroSection = () => {
   return (
     <section className="hero">
       <div aria-hidden="true" className="hero__particles">
-        <ParticleField count={150} />
+        <ParticleField count={50} />
       </div>
 
       <div className="hero__content">
@@ -27,6 +27,9 @@ const HeroSection = () => {
           className="hero__logo"
           src="/plynte logo2.png"
           alt="Plynte Labs"
+          width={400}
+          height={400}
+          fetchPriority="high"
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.6, ease: 'easeOut' }}
