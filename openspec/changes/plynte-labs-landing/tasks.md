@@ -13,7 +13,7 @@
 
 Decision needed before apply: Yes
 Chained PRs recommended: Yes
-Chain strategy: pending
+Chain strategy: feature-branch-chain (PR 4/5 — targeting PR 3 branch)
 400-line budget risk: High
 
 ### Suggested PR Slices (Feature Branch Chain)
@@ -64,21 +64,21 @@ Chain strategy: pending
 
 - [x] **T12**: Create `src/pages/LandingPage/LandingPage.tsx` + `LandingPage.css` — renders all 5 sections in order: HeroSection, EcosystemSection, ArchitectureSection, ContributeSection, MissionSection. Each section receives a `ref` for scrollIntoView navigation. Dependencies: T6-T10. Verify: landing page renders, all sections visible in correct order.
 
-- [ ] **T13**: Modify `src/routes/AppRouter.tsx` — replace 5 routes with single `<LandingPage>` at `"/"`. Keep 404 wildcard catching `*`. Keep BrowserRouter, Suspense, ScrollToTop. Dependencies: T12. Verify: `"/"` renders landing, `"/anything"` renders 404.
+- [x] **T13**: Modify `src/routes/AppRouter.tsx` — replace 5 routes with single `<LandingPage>` at `"/"`. Keep 404 wildcard catching `*`. Keep BrowserRouter, Suspense, ScrollToTop. Dependencies: T12. Verify: `"/"` renders landing, `"/anything"` renders 404.
 
-- [ ] **T14**: Modify `src/layouts/MainLayout.tsx` — update navbar import to simplified org navbar. Fix nested `<main>` landmark: use `<div>` wrapper or remove outer `<main>`. Dependencies: T15. Verify: inspect DOM, only one `<main>` element exists.
+- [x] **T14**: Modify `src/layouts/MainLayout.tsx` — no changes needed: navbar import path unchanged (same file), nested `<main>` fixed in LandingPage instead (changed `<main>` → `<div>`). Dependencies: T15. Verify: inspect DOM, only one `<main>` element exists.
 
-- [ ] **T15**: Modify `src/layouts/navbar/navbar.tsx` — flat org links (Home #, Projects #ecosystem, Contribute #contribute) + LanguageSwitcher. Replace logo with `<img src="/plynte logo2.png">`. Remove MegaMenu toggle. Keep scroll-based `isScrolled` class. Delete `src/layouts/navbar/MegaMenu.tsx` + `MegaMenu.css`. Modify `navbar.config.ts` — flat items, no children. Modify `navbar.css` — green hover color. Delete `src/components/UI/Navbar/NavbarLogo.tsx` + `.css`. Dependencies: T1. Verify: navbar shows 3 flat links + LanguageSwitcher, no mega menu toggle, scroll adds scrolled class.
+- [x] **T15**: Modify `src/layouts/navbar/navbar.tsx` — flat org links (Home #, Projects #ecosystem, Contribute #contribute) + LanguageSwitcher. Replaced logo with `<img src="/Plynte.svg">`. Removed MegaMenu toggle. Kept scroll-based `isScrolled` class. Deleted `src/layouts/navbar/MegaMenu.tsx` + `MegaMenu.css`. Modified `navbar.config.ts` — flat items, no children. Modified `navbar.css` — green hover color. Deleted `src/components/UI/Navbar/NavbarLogo.tsx` + `.css`. Dependencies: T1. Verify: navbar shows 3 flat links + LanguageSwitcher, no mega menu toggle, scroll adds scrolled class.
 
-- [ ] **T16**: Modify `src/components/SEOHead.tsx` — update title suffix to "Plynte Labs", description to org copy, OG image to `"/plynte logo2.png"`. Remove page-specific title mapping. Dependencies: T11. Verify: page source shows "Plynte Labs" in title and OG tags.
+- [x] **T16**: Modify `src/components/SEOHead.tsx` — updated title suffix to "Plynte Labs", OG image to `"/plynte logo2.png"`. Removed page-specific title mapping. Uses t("seo.title") and t("seo.description") for org defaults. Dependencies: T11. Verify: page source shows "Plynte Labs" in title and OG tags.
 
-- [ ] **T17**: Modify `src/contexts/LanguageContext.tsx` — rename localStorage key `"portfolio_lang"` → `"plynte_lang"`. Dependencies: none. Verify: toggle language, refresh page, language persists under new key.
+- [x] **T17**: Modify `src/contexts/LanguageContext.tsx` — renamed localStorage key `"portfolio_lang"` → `"plynte_lang"`. Dependencies: none. Verify: toggle language, refresh page, language persists under new key.
 
-- [ ] **T18**: Modify `index.html` — update `<title>`, `<meta description>`, `og:title`, `og:description`, `og:image`, `twitter:*`, JSON-LD (Person→Organization, update SoftwareApplication entries). Dependencies: none. Verify: view source, org metadata renders correctly.
+- [x] **T18**: Modify `index.html` — updated `<title>`, `<meta description>`, `og:title`, `og:description`, `og:image`, `twitter:*`, JSON-LD (Person→Organization with Brick.draw, LiveAudio, VoiceAI entries). Dependencies: none. Verify: view source, org metadata renders correctly.
 
-- [ ] **T19**: Modify `package.json` — rename `"name"` to `"plynte-labs-landing"`, update `"description"`. Dependencies: none. Verify: `pnpm install` works after rename.
+- [x] **T19**: Modify `package.json` — renamed `"name"` to `"plynte-labs-landing"`, updated `"description"`. Dependencies: none. Verify: `pnpm install` works after rename.
 
-- [ ] **T20**: Modify `src/App.tsx` — fix nested `<main>` if App.tsx wraps content in `<main>`. Minor adjustments for new router. Dependencies: T14. Verify: single `<main>` landmark in DOM.
+- [x] **T20**: Modify `src/App.tsx` — no changes needed. App.tsx has no `<main>` element. Nested `<main>` fixed in LandingPage (T14). Dependencies: T14. Verify: single `<main>` landmark in DOM.
 
 - [x] **T21**: Extend `src/types/index.ts` — add `Project`, `Pillar`, `NavItem` interfaces per design contracts. Dependencies: none. Verify: `tsc -b` compiles.
 
@@ -86,30 +86,30 @@ Chain strategy: pending
 
 ## Phase 4: Cleanup (DELETE)
 
-- [ ] **T22**: Delete personal pages: `src/pages/HomePage/`, `src/pages/AboutPage/`, `src/pages/PortfolioPage/`, `src/pages/DetailsPage/` (all files within). Dependencies: T13 (router disconnected). Verify: grep imports of deleted pages — zero in remaining source.
+- [x] **T22**: Delete personal pages: `src/pages/HomePage/`, `src/pages/AboutPage/`, `src/pages/PortfolioPage/`, `src/pages/DetailsPage/` (all files within). Dependencies: T13 (router disconnected). Verify: grep imports of deleted pages — zero in remaining source.
 
-- [ ] **T23**: Delete personal features: `src/features/HomeSection/`, `AboutSection/`, `StorySection/`, `PhilosophySection/`, `LlmInsightsSection/`, `DetailSection/`, `FeatureSelector/`, `InfrastructureDetail/`. Dependencies: T22. Verify: grep — zero imports remain.
+- [x] **T23**: Delete personal features: `src/features/HomeSection/`, `AboutSection/`, `StorySection/`, `PhilosophySection/`, `LlmInsightsSection/`, `DetailSection/`, `FeatureSelector/`, `InfrastructureDetail/`. Dependencies: T22. Verify: grep — zero imports remain.
 
-- [ ] **T24**: Delete personal components: `src/components/Contacto/`, `src/components/Portfolio/`, `src/components/UI/ImgContainer/`, `src/components/UI/ScrollableContainer/`, `src/components/UI/PageHeader/`. Dependencies: T23. Verify: grep — zero imports.
+- [x] **T24**: Delete personal components: `src/components/Contacto/`, `src/components/Portfolio/`, `src/components/UI/ImgContainer/`, `src/components/UI/ScrollableContainer/`, `src/components/UI/PageHeader/`. Dependencies: T23. Verify: grep — zero imports.
 
-- [ ] **T25**: Delete personal data: `src/data/cvData.ts`, `src/data/projectTranslations.ts`. Dependencies: T24. Verify: grep — zero imports.
+- [x] **T25**: Delete personal data: `src/data/cvData.ts`, `src/data/projectTranslations.ts`. Dependencies: T24. Verify: grep — zero imports.
 
-- [ ] **T26**: Delete personal hook: `src/hooks/useImagePreloader.ts`. Dependencies: T24. Verify: grep — zero imports.
+- [x] **T26**: Delete personal hook: `src/hooks/useImagePreloader.ts`. Dependencies: T24. Verify: grep — zero imports.
 
-- [ ] **T27**: Delete personal assets: `public/pictures/` (all files + subdirs), `public/Franguh.svg`, `public/structure/`. Dependencies: T16 (OG image updated first). Verify: `pnpm build` passes.
+- [x] **T27**: Delete personal assets: `public/pictures/` (all files + subdirs), `public/Franguh.svg`, `public/structure/`. Dependencies: T16 (OG image updated first). Verify: `pnpm build` passes.
 
-- [ ] **T28**: Delete personal docs: `Agente.md`, `Mejoras.md`, `Prompt.md`, `Revision.md`, `Sesiones/`, `docs/audit/`, `image.png`. Dependencies: none. Verify: files removed from repo.
+- [x] **T28**: Delete personal docs: `Agente.md`, `Mejoras.md`, `Prompt.md`, `Revision.md`, `Sesiones/`, `docs/audit/`, `image.png`. Dependencies: none. Verify: files removed from repo.
 
-- [ ] **T29**: Modify `src/pages/NotFoundPage/` — replace Pikachu + personal text with org copy (use translations `notFound.*`), remove "About Me" button, add GitHub org link. Dependencies: T11 (notFound keys exist). Verify: 404 page renders org-themed message.
+- [x] **T29**: Modify `src/pages/NotFoundPage/` — replace Pikachu + personal text with org copy (use translations `notFound.*`), remove "About Me" button, add GitHub org link. Dependencies: T11 (notFound keys exist). Verify: 404 page renders org-themed message.
 
-- [ ] **T30**: Remove `@emailjs/browser` from `package.json` dependencies. Run `grep` for `@emailjs` — confirm zero imports remain, then `pnpm install`. Dependencies: T24 (Contacto deleted). Verify: `pnpm install` + `pnpm build`.
+- [x] **T30**: Remove `@emailjs/browser` from `package.json` dependencies. Run `grep` for `@emailjs` — confirm zero imports remain, then `pnpm install`. Dependencies: T24 (Contacto deleted). Verify: `pnpm install` + `pnpm build`.
 
-- [ ] **T31**: Clean up `src/styles/GlassUpgrades.css` — remove dead `.PhilosophySection`/`.PhilosophyCard`/`.skill-category`/`.skill-tag` rules. Update remaining orange references → green. Extract reusable `.glass-card` base class. Dependencies: T23 (PhilosophySection deleted). Verify: `pnpm build` passes.
+- [x] **T31**: Clean up `src/styles/GlassUpgrades.css` — file deleted entirely (not imported anywhere, all rules targeted deleted components). Dependencies: T23 (PhilosophySection deleted). Verify: `pnpm build` passes.
 
 ---
 
 ## Phase 5: Verify
 
-- [ ] **T32**: Run `pnpm build` — `tsc -b && vite build`. MUST pass with ZERO errors. Dependencies: T1-T31 complete. Verify: terminal output shows success.
+- [x] **T32**: Run `pnpm build` — `tsc -b && vite build`. MUST pass with ZERO errors. Dependencies: T1-T31 complete. Verify: terminal output shows success.
 
-- [ ] **T33**: Run `pnpm lint` — MUST pass with ZERO errors. Dependencies: T32. Verify: terminal output shows zero warnings/errors.
+- [x] **T33**: Run `pnpm lint` — MUST pass with ZERO errors. Dependencies: T32. Verify: terminal output shows zero warnings/errors.

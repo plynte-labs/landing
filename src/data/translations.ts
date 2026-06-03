@@ -1,5 +1,5 @@
 // src/data/translations.ts
-export const translations: Record<string, any> = {
+export const translations: Record<string, Record<string, unknown>> = {
   es: {
     navbar: {
       inicio: "Inicio",

@@ -1,34 +1,23 @@
 export interface NavigationItem {
   label: string;
   translationKey?: string;
-  link?: string;
-  children?: NavigationItem[];
+  href: string;
 }
 
 export const NAV_ITEMS: NavigationItem[] = [
-  { 
-    label: "INICIO", 
+  {
+    label: "INICIO",
     translationKey: "navbar.inicio",
-    link: "/",
-    children: [
-      { label: "Inicio", translationKey: "navbar.inicioSub", link: "/" },
-    ],
-  },
-  { 
-    label: "SOBRE MÍ", 
-    translationKey: "navbar.sobreMi",
-    link: "/about",
-    children: [
-      { label: "Sobre mí", translationKey: "navbar.sobreMiSub", link: "/about" },
-      { label: "Detalles", translationKey: "navbar.detallesSub", link: "/detail" },
-    ],
+    href: "#hero",
   },
   {
-    label: "PORTFOLIO", 
-    translationKey: "navbar.portfolio",
-    link: "/portfolio",
-    children: [
-      { label: "Portfolio", translationKey: "navbar.portfolioSub", link: "/Portfolio" },
-    ],
+    label: "PROYECTOS",
+    translationKey: "navbar.proyectos",
+    href: "#ecosystem",
+  },
+  {
+    label: "CONTRIBUIR",
+    translationKey: "navbar.contribuir",
+    href: "#contribute",
   },
 ];

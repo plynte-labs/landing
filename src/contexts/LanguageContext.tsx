@@ -7,7 +7,7 @@ export type Language = "es" | "en";
 interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
-  t: (key: string) => any;
+  t: (key: string) => string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -15,7 +15,7 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     // 1. Prioriza localStorage
-    const saved = localStorage.getItem("portfolio_lang");
+    const saved = localStorage.getItem("plynte_lang");
     if (saved === "es" || saved === "en") return saved;
     
     // 2. Por defecto es Español ('es') para la audiencia de habla hispana
@@ -24,7 +24,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
-    localStorage.setItem("portfolio_lang", lang);
+    localStorage.setItem("plynte_lang", lang);
   };
 
   // SEO dinámico nativo: actualiza el atributo lang del HTML ante cambios de idioma
@@ -33,8 +33,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, [language]);
 
   // Función traductora ligera que navega objetos anidados (ej. t('navbar.inicio'))
-  const t = (key: string): any => {
+  const t = (key: string): string => {
     const keys = key.split(".");
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let current: any = translations[language];
 
     for (const k of keys) {
@@ -45,7 +46,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       }
     }
 
-    return current !== undefined ? current : key;
+    return typeof current === "string" ? current : key;
   };
 
   return (
@@ -55,6 +56,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (!context) {

@@ -1,42 +1,34 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "../../components/UI/Button/Button";
 import "./NotFoundPage.css";
 import { SEOHead } from "../../components/SEOHead";
-import PageHeader from "../../components/UI/PageHeader/PageHeader";
 import { useLanguage } from "../../contexts/LanguageContext";
 
 const NotFoundPage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const { t } = useLanguage();
-
-  const pathname = location.pathname;
-  const urlInfoParts = t("notFound.urlInfo").split("{path}");
 
   return (
     <div className="Page404">
       <SEOHead title={`404 - ${t("notFound.title")}`} description={t("notFound.description")} />
-      <PageHeader
-        eyebrow="404"
-        title={t("notFound.title")}
-        description={t("notFound.description")}
-      />
 
       <div className="Page404__content">
-        <p>
-          {urlInfoParts[0]}<code>{pathname}</code>{urlInfoParts[1]}
-        </p>
-        <p>
-          {t("notFound.subInfo")}
-        </p>
+        <h1 className="Page404__code">404</h1>
+        <h2>{t("notFound.title")}</h2>
+        <p>{t("notFound.description")}</p>
 
         <div className="Page404__buttons">
-          <Button variant="primary" onClick={() => navigate('/')}>
-            {t("notFound.btnHome")}
+          <Button variant="primary" onClick={() => navigate("/")}>
+            {t("hero.cta")}
           </Button>
-          <Button variant="secondary" onClick={() => navigate('/about')}>
-            {t("notFound.btnAbout")}
-          </Button>
+          <a
+            href="https://github.com/plynte-labs"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button button--secondary"
+          >
+            {t("notFound.btnGithub")}
+          </a>
         </div>
       </div>
     </div>

@@ -18,7 +18,21 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
 
+.navbar-logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.navbar__logo {
+  height: 40px;
+  width: auto;
+  display: block;
+}
 
 .navbar-menu {
   display: flex;
@@ -38,7 +52,7 @@
 }
 
 .navbar-item a:hover {
-  color: var(--color-opposite);
+  color: var(--brand-green, #6FF073);
   font-weight: 500;
 }
 
@@ -48,18 +62,14 @@
   gap: var(--space-4);
 }
 
-
 /* Optional: hide menu in mobile if you don't need it */
 @media (max-width: 920px) {
   .navbar {
     padding: var(--space-8) var(--space-8);
-   
   }
 
-  
   .navbar-menu {
     display: none;
-
   }
 
   .navbar-right {

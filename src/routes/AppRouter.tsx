@@ -3,11 +3,8 @@ import { MainLayout } from "../layouts/MainLayout";
 import { lazy, Suspense } from "react";
 import Loader from "../components/UI/Loader/Loader";
 import ScrollToTop from "../components/UI/ScrollToTop/ScrollToTop";
+import LandingPage from "../pages/LandingPage/LandingPage";
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
-const AboutPage = lazy(() => import("../pages/AboutPage/AboutPage"));
-const DetailsPage = lazy(() => import("../pages/DetailsPage/DetailsPage"));
-const PortfolioPage = lazy(() => import("../pages/PortfolioPage/PortfolioPage"));
 const NotFoundPage = lazy(() => import("../pages/NotFoundPage/NotFoundPage"));
 
 const AppRouter = () => (
@@ -16,11 +13,8 @@ const AppRouter = () => (
         <Suspense fallback={<Loader message="Cargando..." />}>
             <Routes>
                 <Route element={<MainLayout />}>
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/about" element={<AboutPage />} />
-                    <Route path="/portfolio/:slug" element={<DetailsPage />} />
-                    <Route path="/portfolio" element={<PortfolioPage />} />
-                    <Route path="*"  element={<NotFoundPage />} />
+                    <Route path="/" element={<LandingPage />} />
+                    <Route path="*" element={<NotFoundPage />} />
                 </Route>
             </Routes>
         </Suspense>

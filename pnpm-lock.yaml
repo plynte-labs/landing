@@ -8,9 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@emailjs/browser':
-        specifier: ^4.4.1
-        version: 4.4.1
       '@vercel/analytics':
         specifier: ^1.6.1
         version: 1.6.1(react@19.2.5)
@@ -68,10 +65,6 @@ importers:
         version: 6.4.2
 
 packages:
-
-  '@emailjs/browser@4.4.1':
-    resolution: {integrity: sha512-DGSlP9sPvyFba3to2A50kDtZ+pXVp/0rhmqs2LmbMS3I5J8FSOgLwzY2Xb4qfKlOVHh29EAutLYwe5yuEZmEFg==}
-    engines: {node: '>=14.0.0'}
 
   '@esbuild/aix-ppc64@0.25.12':
     resolution: {integrity: sha512-Hhmwd6CInZ3dwpuGTF8fJG6yoWmsToE+vYgD4nytZVxcu1ulHpUQRAB1UJ8+N1Am3Mz4+xOByoQoSZf4D+CpkA==}
@@ -1121,8 +1114,6 @@ packages:
     engines: {node: '>=10'}
 
 snapshots:
-
-  '@emailjs/browser@4.4.1': {}
 
   '@esbuild/aix-ppc64@0.25.12':
     optional: true

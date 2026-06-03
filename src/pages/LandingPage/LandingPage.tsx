@@ -14,13 +14,13 @@ const LandingPage = () => {
   const missionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <main className="landing">
-      <div ref={heroRef}><HeroSection /></div>
-      <div ref={ecosystemRef}><EcosystemSection /></div>
-      <div ref={architectureRef}><ArchitectureSection /></div>
-      <div ref={contributeRef}><ContributeSection /></div>
-      <div ref={missionRef}><MissionSection /></div>
-    </main>
+    <div className="landing">
+      <div ref={heroRef} id="hero"><HeroSection /></div>
+      <div ref={ecosystemRef} id="ecosystem"><EcosystemSection /></div>
+      <div ref={architectureRef} id="architecture"><ArchitectureSection /></div>
+      <div ref={contributeRef} id="contribute"><ContributeSection /></div>
+      <div ref={missionRef} id="mission"><MissionSection /></div>
+    </div>
   );
 };
 
