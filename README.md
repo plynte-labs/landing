@@ -1,51 +1,48 @@
-# Pagina de mi portfolio
+# Plynte Labs
 
-En este repositorio me dedico a practicar y estudiar con IA como instructor y agilizador conceptos nuevos sobre el desarrollo web.
+[![License](https://img.shields.io/badge/license-MIT-%236FF073)](./LICENSE)
+[![Stack](https://img.shields.io/badge/stack-react%2019%20%7C%20vite%206%20%7C%20ts%205.8-%236FF073)](https://plynte.com)
 
-## Tecnologias usadas en este proyecto
+**An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure, tools for artists and streamers under the MIT license.**
 
-React, Typescript, Vite, React-Router, CSS3 Puro.
+---
 
-## Como esta estructurado este proyecto
+## 🧬 Ecosystem
 
-![alt text](image.png)
+| Project | Status | Description |
+|---------|--------|-------------|
+| [**Brick.draw**](https://github.com/plynte-labs/brick-draw) | 🟢 Live | Interactive low-latency drawing canvas |
+| **LiveAudio** | 🔜 Coming soon | Real-time audio ingestion with open-weight Whisper models |
+| **VoiceAI** | 🔜 Coming soon | Local audio infrastructure (Ollama + QwenTTS) |
 
-Esta fue la idea inicial como decidi estructurar el proyecto para desarrollar mi página de portfolio.
+## 🏗️ Architecture
 
-### Por que surge esta idea?
+- **Local-First** — Tools run on your machine, not a data center you don't control
+- **MIT Licensed** — Fork it, break it, improve it. The code is yours
+- **CI/CD Pipelines** — Automated linting, type-checking, and production builds on every commit
+- **Hardware Acceleration** — Optimized for consumer hardware, not cloud dependency
 
-No es por mi egoismo, se que hay personas que lo harían mejor incluso la IA es mejor actualmente, solo decidi
-aprender por mi cuenta como estructurar un proyecto ya que en mis antiguas experencias trabajar e investigar a la vez
-conforme surgen las problematicas, no es del todo optimo mas si trabajaba en proyectos de finales de carrera (sin una dirección clara).
+## 🤝 Contribute
 
-Durante este proyecto me canse y decidi tomar las riendas y conocer a fondo los conceptos estructurales y esenciales del desarrollo web. Si bien no me las quiero dar de experto ya que incluso habiendo trabajado en este proyecto me he dado cuenta que desconozco muchisimo del campo, ahora doy por hecho que es un área hiperextensa con subramas inmensamente profundas.
+```
+Fork → Branch → PR → Review
+```
 
-#### Aprendizajes
+We use [Conventional Commits](https://www.conventionalcommits.org/). Write clear descriptions, keep PRs focused, and tests are appreciated.
 
-> X para marcar completado, vacio si lo considere pero aun no esta implementado.
+## 🛠️ Tech Stack
 
-**[ X ]** Si bien trate implementar una arquitectura mixta basada en pages y features, así como la ideologia de tener componentes modulares.
+React 19 · Vite 6 · TypeScript 5.8 (strict) · CSS3 (design tokens) · framer-motion · react-router v6 · react-helmet-async · pnpm
 
-**[ X ]** Tener en cuenta el rendimiento de la página.
+## 🚀 Dev
 
-[ ] Los elementos deben de sumar no restar.
+```bash
+pnpm install
+pnpm run dev     # http://localhost:5173
+pnpm run build   # tsc -b && vite build
+pnpm run lint    # ESLint
+```
 
-[ ] A veces menos es más.
+## 📄 License
 
-[ ] Hacer un código perfecto(tardarme + tiempo) a uno funcional, siempre es lo ideal.
-
-[ ] Modularizar los estilos.
-
-[ ] Usar arquitectura de estilado BEM.
-
-[ ] No casarme con el código o identificarme con el.
-
-[ ] Aceptar cualquier critica para mejoras continuas.
-
-[ ] Tener en cuenta el SEO.
-
-[ ] Variables CSS para solo cambiar un color en una página en vez de 15 páginas.
-
-**[ X ]** Aprender diariamente...
-
-##### 
+MIT © [Plynte Labs](https://github.com/plynte-labs)
