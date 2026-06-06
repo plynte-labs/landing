@@ -15,8 +15,18 @@
   left: 0;
   z-index: 11;
   transition: background 0.2s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .maintainer-banner:hover {
   background: var(--brand-green-hover, #4CAF50);
+}
+
+@media (max-width: 480px) {
+  .maintainer-banner {
+    font-size: 0.7rem;
+    padding: 4px var(--space-2);
+  }
 }
