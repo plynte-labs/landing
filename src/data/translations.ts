@@ -30,7 +30,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       },
       opencohost: {
         name: "OpenCohost",
-        desc: '<span class="eco-hl">Asistente de voz local</span> para streamers construido con <span class="eco-hl">TypeScript, Ollama, Python y Tauri</span>. Procesamiento de lenguaje natural <span class="eco-hl">100% local</span>.',
+        desc: "Asistente de voz local para streamers construido con TypeScript, Ollama, Python y Tauri. Procesamiento de lenguaje natural 100% local.",
       },
       comingSoon: "Próximamente",
       viewOnGithub: "Ver en GitHub",
@@ -122,7 +122,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       },
       opencohost: {
         name: "OpenCohost",
-        desc: '<span class="eco-hl">Local voice assistant</span> for streamers built with <span class="eco-hl">TypeScript, Ollama, Python, and Tauri</span>. <span class="eco-hl">100% local</span> natural language processing.',
+        desc: "Local voice assistant for streamers built with TypeScript, Ollama, Python, and Tauri. 100% local natural language processing.",
       },
       comingSoon: "Coming Soon",
       viewOnGithub: "View on GitHub",

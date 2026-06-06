@@ -76,18 +76,9 @@ const EcosystemSection = () => {
                   {t(`ecosystem.${project.key}.name`)}
                 </h3>
 
-                {isFeatured ? (
-                  <p
-                    className="ecosystem__card-desc ecosystem__card-desc--featured"
-                    dangerouslySetInnerHTML={{
-                      __html: t(`ecosystem.${project.key}.desc`) as string,
-                    }}
-                  />
-                ) : (
-                  <p className="ecosystem__card-desc">
-                    {t(`ecosystem.${project.key}.desc`)}
-                  </p>
-                )}
+                <p className="ecosystem__card-desc">
+                  {t(`ecosystem.${project.key}.desc`)}
+                </p>
 
                 <div className="ecosystem__badges">
                   {project.tech.map((techLabel: string) => (

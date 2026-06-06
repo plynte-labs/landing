@@ -127,18 +127,6 @@ a.glass-card:hover .ecosystem__github-link {
   font-weight: var(--font-weight-semibold);
 }
 
-/* Highlighted spans inside featured description */
-.eco-hl {
-  font-weight: var(--font-weight-semibold);
-  color: #fff;
-  background: linear-gradient(
-    180deg,
-    transparent 60%,
-    rgba(111, 240, 115, 0.18) 60%
-  );
-  padding: 0 0.15em;
-}
-
 /* Footer for featured cards: badge left, link right */
 .ecosystem__card-footer--featured {
   display: flex;
