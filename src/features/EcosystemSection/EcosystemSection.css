@@ -80,6 +80,54 @@ a.glass-card:hover .ecosystem__github-link {
   color: var(--brand-green);
 }
 
+/* Featured card lattice + bold treatment */
+.ecosystem__card-wrap--featured {
+  position: relative;
+}
+
+.ecosystem__card-wrap--featured::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background-image:
+    linear-gradient(to right, rgba(111, 240, 115, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(111, 240, 115, 0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ecosystem__card-wrap--featured .ecosystem__card {
+  position: relative;
+  z-index: 1;
+}
+
+.ecosystem__card-wrap--featured .ecosystem__card-name {
+  font-weight: var(--font-weight-bold);
+}
+
+.ecosystem__card-wrap--featured .ecosystem__coming-soon {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Footer flex row for badge + website link */
+.ecosystem__card-footer--row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ecosystem__website-link {
+  font-size: var(--font-size-xs);
+  color: var(--brand-green);
+  text-decoration: none;
+}
+
+.ecosystem__website-link:hover {
+  text-decoration: underline;
+}
+
 @media (min-width: 768px) {
   .ecosystem__grid {
     grid-template-columns: repeat(2, 1fr);

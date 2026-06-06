@@ -37,6 +37,7 @@ const badgeVariantMap: Record<string, 'green' | 'blue' | 'purple'> = {
   'Real-time': 'green',
   Ollama: 'purple',
   QwenTTS: 'green',
+  Tauri: 'purple',
 };
 
 const getBadgeVariant = (label: string): 'green' | 'blue' | 'purple' => {
@@ -59,11 +60,12 @@ const EcosystemSection = () => {
       >
         {projects.map((project: Project) => {
           const isLive = project.status === 'live';
+          const isFeatured = project.key === 'opencohost';
 
           return (
             <motion.div
               key={project.key}
-              className="ecosystem__card-wrap"
+              className={`ecosystem__card-wrap${isFeatured ? ' ecosystem__card-wrap--featured' : ''}`}
               variants={cardVariants}
             >
               <GlassCard
@@ -88,15 +90,27 @@ const EcosystemSection = () => {
                   ))}
                 </div>
 
-                <div className="ecosystem__card-footer">
+                <div className={`ecosystem__card-footer${!isLive && project.website ? ' ecosystem__card-footer--row' : ''}`}>
                   {isLive ? (
                     <span className="ecosystem__github-link">
                       {t('ecosystem.viewOnGithub')} ↗
                     </span>
                   ) : (
-                    <span className="ecosystem__coming-soon">
-                      {t('ecosystem.comingSoon')}
-                    </span>
+                    <>
+                      <span className="ecosystem__coming-soon">
+                        {t('ecosystem.comingSoon')}
+                      </span>
+                      {project.website && (
+                        <a
+                          href={project.website}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="ecosystem__website-link"
+                        >
+                          {project.website.replace(/^https?:\/\//, '')}
+                        </a>
+                      )}
+                    </>
                   )}
                 </div>
               </GlassCard>
