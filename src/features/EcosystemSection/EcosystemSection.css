@@ -1,6 +1,7 @@
 .ecosystem {
   padding: var(--space-16) var(--space-6);
   background: var(--color-dark-bg);
+  overflow: hidden;
 }
 
 .ecosystem__heading {
@@ -96,7 +97,7 @@ a.glass-card:hover .ecosystem__github-link {
 .ecosystem__card-wrap--featured::before {
   content: '';
   position: absolute;
-  inset: -4px;
+  inset: -2px;
   border-radius: 14px;
   background-image:
     linear-gradient(to right, rgba(111, 240, 115, 0.1) 1px, transparent 1px),

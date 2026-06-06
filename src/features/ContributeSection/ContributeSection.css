@@ -65,7 +65,7 @@
   font-size: var(--font-size-sm);
   color: var(--brand-green);
   text-align: center;
-  overflow-x: auto;
+  overflow-x: clip;
   max-width: 100%;
 }
 
