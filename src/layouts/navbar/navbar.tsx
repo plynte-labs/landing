@@ -6,6 +6,7 @@ import { useLanguage } from "../../contexts/LanguageContext";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const { t } = useLanguage();
 
   useEffect(() => {
@@ -25,7 +26,7 @@ export function Navbar() {
   }, []);
 
   const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    // Only handle anchor links (#...) with smooth scroll
+    setMenuOpen(false);
     if (href.startsWith("#")) {
       e.preventDefault();
       const target = document.getElementById(href.slice(1));
@@ -50,7 +51,7 @@ export function Navbar() {
       </div>
 
       <div className="navbar-right">
-        <ul className="navbar-menu">
+        <ul className={`navbar-menu ${menuOpen ? "navbar-menu--open" : ""}`}>
           {NAV_ITEMS.map((item, index) => {
             const displayLabel = item.translationKey ? t(item.translationKey) : item.label;
             return (
@@ -66,6 +67,16 @@ export function Navbar() {
           })}
         </ul>
         <LanguageSwitcher />
+        <button
+          className={`navbar-hamburger ${menuOpen ? "navbar-hamburger--open" : ""}`}
+          onClick={() => setMenuOpen((prev) => !prev)}
+          aria-label={menuOpen ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={menuOpen}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
       </div>
     </nav>
   );
