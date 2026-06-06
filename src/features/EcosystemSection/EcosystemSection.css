@@ -88,12 +88,26 @@ a.glass-card:hover .ecosystem__github-link {
 .ecosystem__card-wrap--featured::before {
   content: '';
   position: absolute;
+  inset: -4px;
+  border-radius: 14px;
+  background-image:
+    linear-gradient(to right, rgba(111, 240, 115, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(111, 240, 115, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ecosystem__card-wrap--featured::after {
+  content: '';
+  position: absolute;
   inset: 0;
   border-radius: 12px;
-  background-image:
-    linear-gradient(to right, rgba(111, 240, 115, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(111, 240, 115, 0.05) 1px, transparent 1px);
-  background-size: 60px 60px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(111, 240, 115, 0.06) 0%,
+    transparent 70%
+  );
   pointer-events: none;
   z-index: 0;
 }
@@ -101,31 +115,61 @@ a.glass-card:hover .ecosystem__github-link {
 .ecosystem__card-wrap--featured .ecosystem__card {
   position: relative;
   z-index: 1;
+  border-color: rgba(111, 240, 115, 0.15);
 }
 
 .ecosystem__card-wrap--featured .ecosystem__card-name {
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 0 18px var(--brand-green-glow);
 }
 
 .ecosystem__card-wrap--featured .ecosystem__coming-soon {
   font-weight: var(--font-weight-semibold);
 }
 
-/* Footer flex row for badge + website link */
-.ecosystem__card-footer--row {
+/* Highlighted spans inside featured description */
+.eco-hl {
+  font-weight: var(--font-weight-semibold);
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    transparent 60%,
+    rgba(111, 240, 115, 0.18) 60%
+  );
+  padding: 0 0.15em;
+}
+
+/* Footer for featured cards: badge left, link right */
+.ecosystem__card-footer--featured {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .ecosystem__website-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 12px;
+  border-radius: 999px;
   font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
   color: var(--brand-green);
+  background: rgba(111, 240, 115, 0.1);
+  border: 1px solid rgba(111, 240, 115, 0.2);
   text-decoration: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
 }
 
 .ecosystem__website-link:hover {
-  text-decoration: underline;
+  background: rgba(111, 240, 115, 0.18);
+  border-color: rgba(111, 240, 115, 0.35);
+  text-decoration: none;
+}
+
+.ecosystem__website-link-arrow {
+  font-size: 0.9em;
+  opacity: 0.7;
 }
 
 @media (min-width: 768px) {

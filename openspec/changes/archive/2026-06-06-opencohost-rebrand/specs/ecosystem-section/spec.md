@@ -1,14 +1,11 @@
-# Ecosystem Section Specification
+# Delta for Ecosystem Section
 
-## Purpose
-
-Project grid showcasing the 3 Plynte Labs open-source projects: Brick.draw, LiveAudio, and OpenCohost. Each project presented in a glassmorphic card with tech badges and GitHub links.
-
-## Requirements
+## MODIFIED Requirements
 
 ### Requirement: Project Grid
 
 EcosystemSection MUST display 3 project cards in a responsive grid: Brick.draw, LiveAudio, and OpenCohost.
+(Previously: VoiceAI was the third project instead of OpenCohost)
 
 #### Scenario: All three projects displayed
 
@@ -16,19 +13,10 @@ EcosystemSection MUST display 3 project cards in a responsive grid: Brick.draw, 
 - THEN 3 cards are visible in a grid layout (single column on mobile, multi-column on desktop)
 - AND cards correspond to Brick.draw, LiveAudio, and OpenCohost
 
-### Requirement: GlassCard Wrapper
-
-Each project card MUST use the GlassCard component as its wrapper.
-
-#### Scenario: Glassmorphism styling on all cards
-
-- GIVEN EcosystemSection renders
-- THEN every project card has backdrop-filter blur (`12px`) and semi-transparent dark background
-- AND cards show a green border tint (`rgba(111, 240, 115, 0.08)`) on hover
-
 ### Requirement: Card Content Elements
 
 Each card MUST display: project icon or logo, project name, short description (1-2 sentences), 1-4 tech badges via ProjectBadge component, and a GitHub link. Coming-soon cards MAY also display an external website link.
+(Previously: external website links were not supported)
 
 #### Scenario: Card shows all required information
 
@@ -48,6 +36,7 @@ Each card MUST display: project icon or logo, project name, short description (1
 ### Requirement: Bilingual Descriptions
 
 All project names and descriptions MUST be bilingual via i18n keys (`ecosystem.brickdraw.name`, `ecosystem.opencohost.name`, etc.).
+(Previously: used `ecosystem.voiceai.*` keys instead of `ecosystem.opencohost.*`)
 
 #### Scenario: Descriptions switch language
 
@@ -63,30 +52,11 @@ All project names and descriptions MUST be bilingual via i18n keys (`ecosystem.b
 - WHEN the component renders
 - THEN valid "OpenCohost" name and translated description strings are returned in both ES and EN
 
-### Requirement: Staggered Entrance Animation
-
-Cards SHOULD use framer-motion for staggered entrance animations (sequential fade-up with increasing delay per card).
-
-#### Scenario: Cards animate sequentially on scroll
-
-- GIVEN the user scrolls toward EcosystemSection
-- WHEN the section enters the viewport
-- THEN card 1 animates in first, card 2 follows with a short delay, card 3 last
-- AND the animation does not trigger again on re-scroll
-
-### Requirement: GitHub Link Visibility
-
-GitHub links MUST be clearly identifiable (icon or text label) and open in a new tab (`target="_blank" rel="noopener noreferrer"`).
-
-#### Scenario: GitHub link opens repository
-
-- GIVEN a project card with a GitHub link
-- WHEN the user clicks the link
-- THEN the project GitHub repository opens in a new browser tab
+## ADDED Requirements
 
 ### Requirement: Featured Card Visual Treatment
 
-The OpenCohost card MUST render with a green lattice background pattern, scoped via a CSS modifier class (e.g., `ecosystem__card-wrap--featured`). The lattice SHALL use a grid pattern adapted from the ArchitectureSection visual style.
+The OpenCohost card MUST render with a green lattice background pattern, scoped via a CSS modifier class (e.g., `ecosystem__card--featured`). The lattice SHALL use a grid pattern adapted from the ArchitectureSection visual style.
 
 #### Scenario: OpenCohost card has lattice background
 
@@ -102,15 +72,15 @@ The OpenCohost card MUST render with a green lattice background pattern, scoped 
 
 ### Requirement: Featured Card Bold Text
 
-The OpenCohost card's project name MUST use bold font-weight (`var(--font-weight-bold)` / `700`) and its coming-soon badge MUST use semibold font-weight (`var(--font-weight-semibold)` / `600`).
+The OpenCohost card's project name and coming-soon badge MUST use bold font-weight (`var(--font-weight-bold)` / `700`).
 
 #### Scenario: Bold emphasis on featured card name
 
 - GIVEN the OpenCohost card is rendered with the featured modifier class
 - THEN the project name text has `font-weight: 700`
-- AND the "Próximamente" / "Coming Soon" badge text has `font-weight: 600`
+- AND the "Próximamente" / "Coming Soon" badge text has `font-weight: 700`
 
 #### Scenario: Other cards retain normal weight
 
 - GIVEN Brick.draw and LiveAudio cards are rendered
-- THEN their project names and badges use the default font weight (not bold)
+- THEN their project names and badges use the default font weight (not 700)

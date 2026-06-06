@@ -76,9 +76,18 @@ const EcosystemSection = () => {
                   {t(`ecosystem.${project.key}.name`)}
                 </h3>
 
-                <p className="ecosystem__card-desc">
-                  {t(`ecosystem.${project.key}.desc`)}
-                </p>
+                {isFeatured ? (
+                  <p
+                    className="ecosystem__card-desc ecosystem__card-desc--featured"
+                    dangerouslySetInnerHTML={{
+                      __html: t(`ecosystem.${project.key}.desc`) as string,
+                    }}
+                  />
+                ) : (
+                  <p className="ecosystem__card-desc">
+                    {t(`ecosystem.${project.key}.desc`)}
+                  </p>
+                )}
 
                 <div className="ecosystem__badges">
                   {project.tech.map((techLabel: string) => (
@@ -90,7 +99,7 @@ const EcosystemSection = () => {
                   ))}
                 </div>
 
-                <div className={`ecosystem__card-footer${!isLive && project.website ? ' ecosystem__card-footer--row' : ''}`}>
+                <div className={`ecosystem__card-footer${!isLive && project.website ? ' ecosystem__card-footer--featured' : ''}`}>
                   {isLive ? (
                     <span className="ecosystem__github-link">
                       {t('ecosystem.viewOnGithub')} ↗
@@ -108,6 +117,7 @@ const EcosystemSection = () => {
                           className="ecosystem__website-link"
                         >
                           {project.website.replace(/^https?:\/\//, '')}
+                          <span className="ecosystem__website-link-arrow">↗</span>
                         </a>
                       )}
                     </>
