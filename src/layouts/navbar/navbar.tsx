@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { NAV_ITEMS } from "./navbar.config";
 import "./navbar.css";
 import { LanguageSwitcher } from "../../components/UI/LanguageSwitcher/LanguageSwitcher";
@@ -9,15 +9,22 @@ export function Navbar() {
   const { t } = useLanguage();
 
   useEffect(() => {
+    let rafId: number;
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        setIsScrolled(window.scrollY > 50);
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     // Only handle anchor links (#...) with smooth scroll
     if (href.startsWith("#")) {
       e.preventDefault();
@@ -26,10 +33,10 @@ export function Navbar() {
         target.scrollIntoView({ behavior: "smooth" });
       }
     }
-  };
+  }, []);
 
   return (
-    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
+    <nav className={`navbar ${isScrolled ? "scrolled" : ""}`} aria-label="Main navigation">
       <div className="navbar-left">
         <a href="#hero" onClick={(e) => handleNavClick(e, "#hero")} className="navbar-logo-link">
           <img

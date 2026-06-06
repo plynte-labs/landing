@@ -1,6 +1,6 @@
 .architecture {
   padding: var(--space-16) var(--space-6);
-  background: #000000;
+  background: var(--color-dark-bg);
 }
 
 .architecture__heading {

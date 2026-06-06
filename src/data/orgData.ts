@@ -21,9 +21,9 @@ export const projects: Project[] = [
   {
     key: 'opencohost',
     name: 'OpenCohost',
-    description: 'A voice AI platform for streamers built with TypeScript, Ollama, Python, and Tauri',
+    description: 'A voice AI platform for streamers built with Python, Ollama, and real-time processing — runs entirely on your machine.',
     status: 'coming-soon',
-    tech: ['TypeScript', 'Ollama', 'Python', 'Tauri'],
+    tech: ['Python', 'Ollama', 'Real-time', 'YouTube/Twitch'],
     website: 'https://www.opencohost.com',
   },
 ];

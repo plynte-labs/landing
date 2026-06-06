@@ -1,6 +1,6 @@
 // src/contexts/LanguageContext.tsx
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { translations } from "../data/translations";
+import { translations, type TranslationValue } from "../data/translations";
 
 export type Language = "es" | "en";
 
@@ -35,8 +35,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   // Función traductora ligera que navega objetos anidados (ej. t('navbar.inicio'))
   const t = (key: string): string => {
     const keys = key.split(".");
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let current: any = translations[language];
+    let current: TranslationValue = translations[language];
 
     for (const k of keys) {
       if (current && typeof current === "object" && k in current) {

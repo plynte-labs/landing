@@ -1,5 +1,9 @@
-const ParticleField = ({ count = 150 }) => {
-  const particles = Array.from({ length: count }).map((_, i) => {
+import { useMemo } from 'react';
+
+const ParticleField = ({ count = 150, reducedMotion = false }: { count?: number; reducedMotion?: boolean }) => {
+  if (reducedMotion) return null;
+
+  const particles = useMemo(() => Array.from({ length: count }).map((_, i) => {
     const top = Math.random() * 100;
     const left = Math.random() * 100;
     const delay = Math.random() * 10;
@@ -11,6 +15,7 @@ const ParticleField = ({ count = 150 }) => {
       <div
         key={i}
         className="particle"
+        aria-hidden="true"
         style={{
           top: `${top}%`,
           left: `${left}%`,
@@ -22,7 +27,7 @@ const ParticleField = ({ count = 150 }) => {
         }}
       />
     );
-  });
+  }), [count]);
 
   return <>{particles}</>;
 };

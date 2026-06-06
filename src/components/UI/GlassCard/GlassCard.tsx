@@ -1,61 +1,119 @@
 import type { ReactNode } from 'react';
-import { motion, type HTMLMotionProps } from 'framer-motion';
+import { motion } from 'framer-motion';
 import './GlassCard.css';
 
-type MotionAttrs = Omit<HTMLMotionProps<'div'>, 'children' | 'className'>;
+// -------------------------------
+// Internal base — not exported
+// -------------------------------
 
-interface GlassCardProps {
+interface GlassCardBaseProps {
+  as?: React.ElementType;
   children: ReactNode;
   className?: string;
-  href?: string;
-  motionProps?: MotionAttrs;
+  // Allow passthrough props (href, target, rel, motion attrs) for polymorphic rendering
+  [key: string]: unknown;
+}
+
+const GlassCardBase: React.FC<GlassCardBaseProps> = ({
+  as: Component = 'div',
+  children,
+  className,
+  ...rest
+}) => {
+  const combinedClass = ['glass-card', className].filter(Boolean).join(' ');
+  return (
+    <Component className={combinedClass} {...rest}>
+      {children}
+    </Component>
+  );
+};
+
+// -------------------------------
+// Public variant: GlassCard (plain <div>)
+// -------------------------------
+
+export interface GlassCardProps {
+  children: ReactNode;
+  className?: string;
 }
 
 export const GlassCard: React.FC<GlassCardProps> = ({
   children,
   className,
+}) => (
+  <GlassCardBase className={className}>
+    {children}
+  </GlassCardBase>
+);
+
+// -------------------------------
+// Public variant: GlassCardLink (<a> target="_blank")
+// -------------------------------
+
+export interface GlassCardLinkProps {
+  children: ReactNode;
+  className?: string;
+  href: string;
+}
+
+export const GlassCardLink: React.FC<GlassCardLinkProps> = ({
+  children,
+  className,
   href,
-  motionProps,
-}) => {
-  const combinedClass = ['glass-card', className].filter(Boolean).join(' ');
+}) => (
+  <GlassCardBase
+    as="a"
+    className={className}
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {children}
+  </GlassCardBase>
+);
 
-  // Both href and motionProps: wrap content in motion.div inside anchor
-  if (href && motionProps) {
-    return (
-      <a
-        href={href}
-        className={combinedClass}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <motion.div {...motionProps}>{children}</motion.div>
-      </a>
-    );
-  }
+// -------------------------------
+// Public variant: GlassCardMotion (<motion.div>)
+// -------------------------------
 
-  // Only href: render as semantic anchor
-  if (href) {
-    return (
-      <a
-        href={href}
-        className={combinedClass}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        {children}
-      </a>
-    );
-  }
+export interface GlassCardMotionProps {
+  children: ReactNode;
+  className?: string;
+}
 
-  // Only motionProps: render as motion.div
-  if (motionProps) {
-    return (
-      <motion.div className={combinedClass} {...motionProps}>
-        {children}
-      </motion.div>
-    );
-  }
+export const GlassCardMotion: React.FC<GlassCardMotionProps> = ({
+  children,
+  className,
+  ...motionProps
+}) => (
+  <GlassCardBase as={motion.div} className={className} {...motionProps}>
+    {children}
+  </GlassCardBase>
+);
 
-  // Neither: plain div
-  return <div className={combinedClass}>{children}</div>;
-};
+// -------------------------------
+// Public variant: GlassCardMotionLink (<a> > <motion.div>)
+// -------------------------------
+
+export interface GlassCardMotionLinkProps {
+  children: ReactNode;
+  className?: string;
+  href: string;
+}
+
+export const GlassCardMotionLink: React.FC<GlassCardMotionLinkProps> = ({
+  children,
+  className,
+  href,
+  ...motionProps
+}) => (
+  <GlassCardBase
+    as="a"
+    className={className}
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <motion.div {...motionProps}>{children}</motion.div>
+  </GlassCardBase>
+);

@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { GlassCard } from '../../components/UI/GlassCard/GlassCard';
+import { motion, useReducedMotion } from 'framer-motion';
+import { GlassCard, GlassCardLink } from '../../components/UI/GlassCard/GlassCard';
 import { ProjectBadge } from '../../components/UI/ProjectBadge/ProjectBadge';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { projects } from '../../data/orgData';
@@ -28,7 +28,10 @@ const cardVariants = {
   },
 };
 
-const badgeVariantMap: Record<string, 'green' | 'blue' | 'purple'> = {
+type TechLabel = 'TypeScript' | 'Canvas' | 'React' | 'Whisper' | 'Python' | 'Real-time' | 'Ollama' | 'YouTube/Twitch';
+type BadgeVariant = 'green' | 'blue' | 'purple';
+
+const badgeVariantMap: Record<TechLabel, BadgeVariant> = {
   TypeScript: 'blue',
   Canvas: 'purple',
   React: 'blue',
@@ -36,16 +39,13 @@ const badgeVariantMap: Record<string, 'green' | 'blue' | 'purple'> = {
   Python: 'blue',
   'Real-time': 'green',
   Ollama: 'purple',
-  QwenTTS: 'green',
-  Tauri: 'purple',
-};
-
-const getBadgeVariant = (label: string): 'green' | 'blue' | 'purple' => {
-  return badgeVariantMap[label] ?? 'green';
+  'YouTube/Twitch': 'purple',
 };
 
 const EcosystemSection = () => {
   const { t } = useLanguage();
+  const shouldReduceMotion = useReducedMotion();
+  const shouldAnimate = !shouldReduceMotion;
 
   return (
     <section id="ecosystem" className="ecosystem">
@@ -53,9 +53,9 @@ const EcosystemSection = () => {
 
       <motion.div
         className="ecosystem__grid"
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
+        variants={shouldAnimate ? containerVariants : undefined}
+        initial={shouldAnimate ? "hidden" : undefined}
+        whileInView={shouldAnimate ? "visible" : undefined}
         viewport={{ once: true, margin: '-100px' }}
       >
         {projects.map((project: Project) => {
@@ -66,55 +66,102 @@ const EcosystemSection = () => {
             <motion.div
               key={project.key}
               className={`ecosystem__card-wrap${isFeatured ? ' ecosystem__card-wrap--featured' : ''}`}
-              variants={cardVariants}
+              variants={shouldAnimate ? cardVariants : undefined}
             >
-              <GlassCard
-                href={isLive ? project.github : undefined}
-                className="ecosystem__card"
-              >
-                <h3 className="ecosystem__card-name">
-                  {t(`ecosystem.${project.key}.name`)}
-                </h3>
+              {isLive && project.github ? (
+                <GlassCardLink
+                  href={project.github}
+                  className="ecosystem__card"
+                >
+                  <h3 className="ecosystem__card-name">
+                    {t(`ecosystem.${project.key}.name`)}
+                  </h3>
 
-                <p className="ecosystem__card-desc">
-                  {t(`ecosystem.${project.key}.desc`)}
-                </p>
+                  <p className="ecosystem__card-desc">
+                    {t(`ecosystem.${project.key}.desc`)}
+                  </p>
 
-                <div className="ecosystem__badges">
-                  {project.tech.map((techLabel: string) => (
-                    <ProjectBadge
-                      key={techLabel}
-                      label={techLabel}
-                      variant={getBadgeVariant(techLabel)}
-                    />
-                  ))}
-                </div>
+                  <div className="ecosystem__badges">
+                    {project.tech.map((techLabel: string) => (
+                      <ProjectBadge
+                        key={techLabel}
+                        label={techLabel}
+                        variant={badgeVariantMap[techLabel as TechLabel]}
+                      />
+                    ))}
+                  </div>
 
-                <div className={`ecosystem__card-footer${!isLive && project.website ? ' ecosystem__card-footer--featured' : ''}`}>
-                  {isLive ? (
-                    <span className="ecosystem__github-link">
-                      {t('ecosystem.viewOnGithub')} ↗
-                    </span>
-                  ) : (
-                    <>
-                      <span className="ecosystem__coming-soon">
-                        {t('ecosystem.comingSoon')}
+                  <div className={`ecosystem__card-footer${!isLive && project.website ? ' ecosystem__card-footer--featured' : ''}`}>
+                    {isLive ? (
+                      <span className="ecosystem__github-link">
+                        {t('ecosystem.viewOnGithub')} ↗
                       </span>
-                      {project.website && (
-                        <a
-                          href={project.website}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="ecosystem__website-link"
-                        >
-                          {project.website.replace(/^https?:\/\//, '')}
-                          <span className="ecosystem__website-link-arrow">↗</span>
-                        </a>
-                      )}
-                    </>
-                  )}
-                </div>
-              </GlassCard>
+                    ) : (
+                      <>
+                        <span className="ecosystem__coming-soon">
+                          {t('ecosystem.comingSoon')}
+                        </span>
+                        {project.website && (
+                          <a
+                            href={project.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ecosystem__website-link"
+                          >
+                            {project.website.replace(/^https?:\/\//, '')}
+                            <span className="ecosystem__website-link-arrow">↗</span>
+                          </a>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </GlassCardLink>
+              ) : (
+                <GlassCard className="ecosystem__card">
+                  <h3 className="ecosystem__card-name">
+                    {t(`ecosystem.${project.key}.name`)}
+                  </h3>
+
+                  <p className="ecosystem__card-desc">
+                    {t(`ecosystem.${project.key}.desc`)}
+                  </p>
+
+                  <div className="ecosystem__badges">
+                    {project.tech.map((techLabel: string) => (
+                      <ProjectBadge
+                        key={techLabel}
+                        label={techLabel}
+                        variant={badgeVariantMap[techLabel as TechLabel]}
+                      />
+                    ))}
+                  </div>
+
+                  <div className={`ecosystem__card-footer${!isLive && project.website ? ' ecosystem__card-footer--featured' : ''}`}>
+                    {isLive ? (
+                      <span className="ecosystem__github-link">
+                        {t('ecosystem.viewOnGithub')} ↗
+                      </span>
+                    ) : (
+                      <>
+                        <span className="ecosystem__coming-soon">
+                          {t('ecosystem.comingSoon')}
+                        </span>
+                        {project.website && (
+                          <a
+                            href={project.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="ecosystem__website-link"
+                          >
+                            {project.website.replace(/^https?:\/\//, '')}
+                            <span className="ecosystem__website-link-arrow">↗</span>
+                          </a>
+                        )}
+                      </>
+                    )}
+                  </div>
+                </GlassCard>
+              )}
             </motion.div>
           );
         })}

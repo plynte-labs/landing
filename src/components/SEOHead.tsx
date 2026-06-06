@@ -23,6 +23,8 @@ export const SEOHead = ({ title, description, image, url }: SEOProps) => {
             <meta property="og:title" content={displayTitle} />
             <meta property="og:description" content={displayDescription} />
             <meta property="og:image" content={image || 'https://plynte.com/plynte%20logo2.png'} />
+            <meta property="og:image:width" content="1000" />
+            <meta property="og:image:height" content="1000" />
             <meta property="og:url" content={url || 'https://plynte.com'} />
             <meta property="og:type" content="website" />
             <meta name="twitter:card" content="summary_large_image" />

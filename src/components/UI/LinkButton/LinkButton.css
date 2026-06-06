@@ -21,21 +21,11 @@
   left: 0%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg,
-      #ff0000fd,
-      #ff9900,
-      #ffff00,
-      #33ff00,
-      #00ffff,
-      #3300ff,
-      #ff00ff,
-      #ff0000);
-  background-size: 200% 100%;
-  /* animation: rgbAlive 6s ease-in-out infinite alternate; */
-  animation: rgbAlive 6s linear infinite alternate;
+  background: var(--brand-green-glow);
+  animation: pulseGreen 2s ease-in-out infinite;
   opacity: 0;
   z-index: 0;
-  transition: opacity 2s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 .LinkButton:hover::before {
@@ -54,14 +44,9 @@
   z-index: 2;
 }
 
-@keyframes rgbAlive {
-  0% {
-    background-position: 0% 0%;
-  }
-
-  100% {
-    background-position: -100% 0%;
-  }
+@keyframes pulseGreen {
+  0%, 100% { box-shadow: 0 0 4px var(--brand-green-glow); }
+  50%      { box-shadow: 0 0 16px var(--brand-green-glow); }
 }
 
 

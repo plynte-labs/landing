@@ -1,5 +1,36 @@
 // src/data/translations.ts
-export const translations: Record<string, Record<string, unknown>> = {
+export type Locale = 'es' | 'en';
+
+export type TranslationValue = string | { [key: string]: TranslationValue };
+
+export interface TranslationDict {
+  [key: string]: TranslationValue;
+  banner: { text: string };
+  navbar: { inicio: string; proyectos: string; contribuir: string; langToggle: string; maintainer: string };
+  hero: { tagline: string; subtagline: string; cta: string; mitBadge: string };
+  ecosystem: {
+    heading: string;
+    'brick-draw': { name: string; desc: string };
+    liveaudio: { name: string; desc: string };
+    opencohost: { name: string; desc: string };
+    comingSoon: string;
+    viewOnGithub: string;
+  };
+  architecture: {
+    heading: string;
+    'local-first': { title: string; desc: string };
+    'mit-license': { title: string; desc: string };
+    'ci-cd': { title: string; desc: string };
+    'hardware-acceleration': { title: string; desc: string };
+  };
+  contribute: { heading: string; step1: string; step2: string; step3: string; step4: string; codeExample: string; githubLink: string };
+  mission: { heading: string; statement: string; mitNotice: string; maintainer: { name: string; role: string; github: string } };
+  footer: { builtWith: string; license: string; orgLink: string };
+  seo: { title: string; description: string };
+  notFound: { title: string; description: string; btnGithub: string };
+}
+
+export const translations: Record<Locale, TranslationDict> = {
   es: {
     banner: {
       text: "↗ Portfolio de FranGuh → franguh.plynte.com",
@@ -30,7 +61,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       },
       opencohost: {
         name: "OpenCohost",
-        desc: "Asistente de voz local para streamers construido con TypeScript, Ollama, Python y Tauri. Procesamiento de lenguaje natural 100% local.",
+        desc: "Asistente de voz local para streamers construido con Python y Ollama. Procesamiento 100% en tu máquina, integración con YouTube/Twitch.",
       },
       comingSoon: "Próximamente",
       viewOnGithub: "Ver en GitHub",
@@ -81,9 +112,9 @@ export const translations: Record<string, Record<string, unknown>> = {
       orgLink: "Plynte Labs en GitHub",
     },
     seo: {
-      title: "Plynte Labs — Open-Source Software Laboratory",
+      title: "Plynte Labs — Laboratorio de Software Open-Source",
       description:
-        "An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure under the MIT license.",
+        "Un laboratorio de software open-source dedicado a la ingeniería de herramientas de productividad de alto rendimiento e infraestructura de audio local impulsada por IA, bajo licencia MIT.",
     },
     notFound: {
       title: "Página no encontrada",
@@ -122,7 +153,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       },
       opencohost: {
         name: "OpenCohost",
-        desc: "Local voice assistant for streamers built with TypeScript, Ollama, Python, and Tauri. 100% local natural language processing.",
+        desc: "Local voice assistant for streamers built with Python and Ollama. 100% local processing on your machine, YouTube/Twitch integration.",
       },
       comingSoon: "Coming Soon",
       viewOnGithub: "View on GitHub",

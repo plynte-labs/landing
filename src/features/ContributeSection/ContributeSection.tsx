@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { GlassCard } from '../../components/UI/GlassCard/GlassCard';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './ContributeSection.css';
@@ -29,6 +29,7 @@ const STEP_KEYS = ['step1', 'step2', 'step3', 'step4'] as const;
 
 const ContributeSection = () => {
   const { t } = useLanguage();
+  const reducedMotion = useReducedMotion();
 
   return (
     <section id="contribute" className="contribute">
@@ -37,16 +38,21 @@ const ContributeSection = () => {
       <motion.div
         className="contribute__content"
         variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-100px' }}
+        initial={reducedMotion ? "visible" : "hidden"}
+        whileInView={reducedMotion ? undefined : "visible"}
+        viewport={reducedMotion ? undefined : { once: true, margin: '-100px' }}
       >
-        <motion.ol className="contribute__steps" variants={containerVariants}>
+        <motion.ol
+          className="contribute__steps"
+          variants={containerVariants}
+          initial={reducedMotion ? "visible" : undefined}
+        >
           {STEP_KEYS.map((key) => (
             <motion.li
               key={key}
               className="contribute__step"
               variants={itemVariants}
+              initial={reducedMotion ? "visible" : undefined}
             >
               <span className="contribute__step-marker" aria-hidden="true" />
               <span>{t(`contribute.${key}`)}</span>
@@ -54,7 +60,11 @@ const ContributeSection = () => {
           ))}
         </motion.ol>
 
-        <motion.div className="contribute__code-section" variants={itemVariants}>
+        <motion.div
+          className="contribute__code-section"
+          variants={itemVariants}
+          initial={reducedMotion ? "visible" : undefined}
+        >
           <GlassCard className="contribute__code-card">
             <pre className="contribute__code">
               <code>$ git commit -m "{t('contribute.codeExample')}"</code>
@@ -62,7 +72,11 @@ const ContributeSection = () => {
           </GlassCard>
         </motion.div>
 
-        <motion.div className="contribute__community" variants={itemVariants}>
+        <motion.div
+          className="contribute__community"
+          variants={itemVariants}
+          initial={reducedMotion ? "visible" : undefined}
+        >
           <a
             href="https://github.com/plynte-labs"
             target="_blank"

@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { GlassCard } from '../../components/UI/GlassCard/GlassCard';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { pillars } from '../../data/orgData';
@@ -19,6 +19,7 @@ const cardVariants = {
 
 const ArchitectureSection = () => {
   const { t } = useLanguage();
+  const reducedMotion = useReducedMotion();
 
   return (
     <section id="architecture" className="architecture">
@@ -32,9 +33,9 @@ const ArchitectureSection = () => {
             key={pillar.key}
             className="architecture__card-wrap"
             variants={cardVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-50px' }}
+            initial={reducedMotion ? "visible" : "hidden"}
+            whileInView={reducedMotion ? undefined : "visible"}
+            viewport={reducedMotion ? undefined : { once: true, margin: '-50px' }}
           >
             <GlassCard className="architecture__card">
               <span

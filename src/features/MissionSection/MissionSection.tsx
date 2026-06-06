@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { GlassCard } from '../../components/UI/GlassCard/GlassCard';
 import { useLanguage } from '../../contexts/LanguageContext';
 import './MissionSection.css';
@@ -17,6 +17,7 @@ const fadeInVariants = {
 
 const MissionSection = () => {
   const { t } = useLanguage();
+  const reducedMotion = useReducedMotion();
 
   return (
     <section id="mission" className="mission">
@@ -25,9 +26,9 @@ const MissionSection = () => {
       <motion.div
         className="mission__content"
         variants={fadeInVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-80px' }}
+        initial={reducedMotion ? "visible" : "hidden"}
+        whileInView={reducedMotion ? undefined : "visible"}
+        viewport={reducedMotion ? undefined : { once: true, margin: '-80px' }}
       >
         <p className="mission__statement">{t('mission.statement')}</p>
 

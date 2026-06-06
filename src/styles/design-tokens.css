@@ -5,6 +5,9 @@
   --color-text: #1a1a1a;
   --color-text-muted: #666;
   --color-text-light: #ffffff;
+  --color-secondary: #9FA2B4;
+  --color-text-secondary: white;
+  --color-bg-secondary: black;
   --color-primary: #6FF073;
   --color-primary-hover: #4CAF50;
   --color-accent: #6FF073;
@@ -30,7 +33,7 @@
 
   /* Tipografía */
   --font-display: 'Anton', sans-serif;
-  --font-body: 'Inter', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
   --font-mono: monospace;
 
   /* Font weights */
