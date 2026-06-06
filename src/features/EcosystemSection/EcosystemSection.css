@@ -58,14 +58,22 @@
 }
 
 .ecosystem__github-link {
-  font-size: var(--font-size-sm);
-  color: var(--color-secondary);
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: 4px;
+  padding: 3px 12px;
+  border-radius: 999px;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--brand-green);
+  background: rgba(111, 240, 115, 0.1);
+  border: 1px solid rgba(111, 240, 115, 0.2);
+  transition: background var(--transition-fast), border-color var(--transition-fast);
 }
 
 a.glass-card:hover .ecosystem__github-link {
+  background: rgba(111, 240, 115, 0.18);
+  border-color: rgba(111, 240, 115, 0.35);
   color: var(--brand-green);
 }
 
