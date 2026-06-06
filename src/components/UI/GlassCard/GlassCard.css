@@ -1,4 +1,5 @@
 .glass-card {
+  display: block;
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   backdrop-filter: var(--glass-blur);
@@ -21,5 +22,4 @@
 a.glass-card {
   text-decoration: none;
   color: inherit;
-  display: block;
 }
