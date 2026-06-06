@@ -13,7 +13,7 @@
 |---------|--------|-------------|
 | [**Brick.draw**](https://github.com/plynte-labs/brick-draw) | 🟢 Live | Interactive low-latency drawing canvas |
 | **LiveAudio** | 🔜 Coming soon | Real-time audio ingestion with open-weight Whisper models |
-| **VoiceAI** | 🔜 Coming soon | Local audio infrastructure (Ollama + QwenTTS) |
+| **OpenCohost** | 🔜 Coming soon | Local voice assistant for streamers (TypeScript + Ollama + Python + Tauri) |
 
 ## 🏗️ Architecture
 
