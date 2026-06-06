@@ -66,12 +66,14 @@
   color: var(--brand-green);
   text-align: center;
   overflow-x: auto;
+  max-width: 100%;
 }
 
 .contribute__code {
   margin: 0;
   white-space: pre-wrap;
-  word-break: break-word;
+  word-break: break-all;
+  overflow-wrap: anywhere;
 }
 
 .contribute__code code {
