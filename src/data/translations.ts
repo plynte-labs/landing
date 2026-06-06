@@ -28,9 +28,9 @@ export const translations: Record<string, Record<string, unknown>> = {
         name: "LiveAudio",
         desc: "Procesamiento de audio en tiempo real con Whisper, Python e integración OBS. Infraestructura de audio local impulsada por IA para streaming en vivo.",
       },
-      voiceai: {
-        name: "VoiceAI",
-        desc: "Asistente de voz local con Ollama, QwenTTS e integración Twitch. Procesamiento de lenguaje natural 100% local para streamers.",
+      opencohost: {
+        name: "OpenCohost",
+        desc: "Asistente de voz local para streamers construido con TypeScript, Ollama, Python y Tauri. Procesamiento de lenguaje natural 100% local.",
       },
       comingSoon: "Próximamente",
       viewOnGithub: "Ver en GitHub",
@@ -60,7 +60,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       step2: "Creá una rama con tu feature o fix",
       step3: "Abrí un Pull Request con conventional commits",
       step4: "El equipo revisa, discute y mergea",
-      codeExample: "feat(voiceai): add streaming response buffer",
+      codeExample: "feat(opencohost): add streaming response buffer",
       githubLink: "Explorá nuestros repositorios en GitHub",
     },
     mission: {
@@ -120,9 +120,9 @@ export const translations: Record<string, Record<string, unknown>> = {
         name: "LiveAudio",
         desc: "Real-time audio processing with Whisper, Python, and OBS integration. Local AI-driven audio infrastructure for live streaming.",
       },
-      voiceai: {
-        name: "VoiceAI",
-        desc: "Local voice assistant powered by Ollama, QwenTTS, and Twitch integration. 100% local natural language processing for streamers.",
+      opencohost: {
+        name: "OpenCohost",
+        desc: "Local voice assistant for streamers built with TypeScript, Ollama, Python, and Tauri. 100% local natural language processing.",
       },
       comingSoon: "Coming Soon",
       viewOnGithub: "View on GitHub",
@@ -152,7 +152,7 @@ export const translations: Record<string, Record<string, unknown>> = {
       step2: "Create a branch for your feature or fix",
       step3: "Open a Pull Request with conventional commits",
       step4: "The team reviews, discusses, and merges",
-      codeExample: "feat(voiceai): add streaming response buffer",
+      codeExample: "feat(opencohost): add streaming response buffer",
       githubLink: "Explore our repositories on GitHub",
     },
     mission: {

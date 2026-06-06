@@ -9,6 +9,7 @@ export interface Project {
     name: string;
     description: string;
     github?: string;
+    website?: string;
     status: 'live' | 'coming-soon';
     tech: string[];
 }

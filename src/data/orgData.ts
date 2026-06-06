@@ -19,11 +19,12 @@ export const projects: Project[] = [
     tech: ['Whisper', 'Python', 'Real-time'],
   },
   {
-    key: 'voiceai',
-    name: 'VoiceAI',
-    description: 'Voice AI powered by Ollama and QwenTTS',
+    key: 'opencohost',
+    name: 'OpenCohost',
+    description: 'A voice AI platform for streamers built with TypeScript, Ollama, Python, and Tauri',
     status: 'coming-soon',
-    tech: ['Ollama', 'QwenTTS', 'Python'],
+    tech: ['TypeScript', 'Ollama', 'Python', 'Tauri'],
+    website: 'https://www.opencohost.com',
   },
 ];
 
