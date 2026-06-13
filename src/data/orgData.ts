@@ -14,8 +14,9 @@ export const projects: Project[] = [
   {
     key: 'liveaudio',
     name: 'LiveAudio',
-    description: 'Real-time audio processing with Whisper and Python',
-    status: 'coming-soon',
+    description: 'Local real-time ASR subtitles with Whisper, Python, OBS, and WebSocket integration',
+    github: 'https://github.com/plynte-labs/LiveAudio',
+    status: 'live',
     tech: ['Whisper', 'Python', 'Real-time'],
   },
   {
@@ -45,7 +46,7 @@ export const pillars: Pillar[] = [
     key: 'ci-cd',
     icon: '🔄',
     title: 'CI/CD',
-    description: 'Automated testing, building, and deployment pipelines for every project.',
+    description: 'Release-ready projects use automated checks for linting, testing, building, and delivery before public promotion.',
   },
   {
     key: 'hardware-acceleration',

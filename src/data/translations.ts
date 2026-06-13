@@ -78,7 +78,7 @@ export const translations: Record<Locale, TranslationDict> = {
       },
       "ci-cd": {
         title: "CI/CD",
-        desc: "Pruebas automatizadas, builds y pipelines de despliegue para cada proyecto.",
+        desc: "Los proyectos listos para release usan checks automatizados de linting, pruebas, build y entrega antes de su promoción pública.",
       },
       "hardware-acceleration": {
         title: "Aceleración por Hardware",
@@ -149,7 +149,7 @@ export const translations: Record<Locale, TranslationDict> = {
       },
       liveaudio: {
         name: "LiveAudio",
-        desc: "Real-time audio processing with Whisper, Python, and OBS integration. Local AI-driven audio infrastructure for live streaming.",
+        desc: "Local real-time ASR subtitles with Whisper, Python, OBS, and WebSocket integration. AI-driven audio infrastructure for live streaming.",
       },
       opencohost: {
         name: "OpenCohost",
@@ -170,7 +170,7 @@ export const translations: Record<Locale, TranslationDict> = {
       },
       "ci-cd": {
         title: "CI/CD",
-        desc: "Automated testing, building, and deployment pipelines for every project.",
+        desc: "Release-ready projects use automated checks for linting, testing, building, and delivery before public promotion.",
       },
       "hardware-acceleration": {
         title: "Hardware Acceleration",
