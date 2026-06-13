@@ -22,10 +22,10 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     return "es";
   });
 
-  const setLanguage = (lang: Language) => {
+  const setLanguage = useCallback((lang: Language) => {
     setLanguageState(lang);
     localStorage.setItem("plynte_lang", lang);
-  };
+  }, []);
 
   // SEO dinámico nativo: actualiza el atributo lang del HTML ante cambios de idioma
   useEffect(() => {
