@@ -23,7 +23,7 @@ Plynte Labs es un laboratorio de software open-source enfocado en herramientas d
 | Branching | Use each repository's configured default branch. Avoid branch renames unless the migration cost is justified. |
 | License | MIT for public open-source projects unless a repo explicitly says otherwise. |
 | Commits | Conventional Commits. |
-| CI | Public release-ready repositories should run lint/typecheck/tests/build before merge or release. |
+| CI | Security checks run before install/lint/build. Public release-ready repositories should scan for secrets and local-only paths before merge or release. |
 | Docs | README, license, contributing, security, and support docs should be present before a repo is promoted. |
 | Language | Public organization docs are bilingual: English and Spanish. |
 

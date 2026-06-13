@@ -10,9 +10,29 @@ permissions:
   contents: read
 
 jobs:
+  security:
+    name: Security checks
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check sensitive local patterns
+        run: node scripts/security/check-sensitive-patterns.mjs
+
+      - name: Secret scan
+        uses: trufflesecurity/trufflehog@v3.95.5
+        with:
+          path: ./
+          extra_args: --results=verified,unknown --fail
+
   validate:
     name: Lint and build
     runs-on: ubuntu-latest
+    needs: security
 
     steps:
       - name: Checkout
