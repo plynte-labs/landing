@@ -1,0 +1,54 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const ariaLabel =
+  locale === 'es'
+    ? 'Portfolio del mantenedor (abre en una pestaña nueva)'
+    : 'Maintainer portfolio (opens in a new tab)';
+---
+
+<div class="banner">
+  <div class="container banner__inner">
+    <a
+      class="banner__link"
+      href="https://franguh.plynte.com"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={ariaLabel}
+    >
+      {t('banner.text')}
+    </a>
+  </div>
+</div>
+
+<style>
+  .banner {
+    background: var(--bg-deep);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .banner__inner {
+    display: flex;
+    justify-content: flex-end;
+    padding-block: var(--space-2);
+  }
+  .banner__link {
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    letter-spacing: 0.01em;
+    color: var(--text-secondary);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .banner__link:hover {
+    color: var(--brand-text);
+  }
+</style>

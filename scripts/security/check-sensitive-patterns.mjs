@@ -8,12 +8,14 @@ const ignoredDirectories = new Set([
   '.git',
   'node_modules',
   'dist',
+  '.astro',
   '.vercel',
   '.turbo',
   '.cache',
 ]);
 
 const scannedExtensions = new Set([
+  '.astro',
   '.css',
   '.cjs',
   '.env',

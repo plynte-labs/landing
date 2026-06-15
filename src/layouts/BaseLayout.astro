@@ -1,0 +1,94 @@
+---
+import '@/styles/tokens.css';
+import '@/styles/global.css';
+import type { Locale } from '@/i18n/ui';
+import SEO from '@/components/seo/SEO.astro';
+import JsonLd from '@/components/seo/JsonLd.astro';
+import MaintainerBanner from '@/components/layout/MaintainerBanner.astro';
+import Navbar from '@/components/layout/Navbar.astro';
+import Footer from '@/components/layout/Footer.astro';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  image?: string;
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+const { locale, title, description, image, alternates } = Astro.props;
+const skipLabel = locale === 'es' ? 'Saltar al contenido' : 'Skip to content';
+---
+
+<!doctype html>
+<html lang={locale} class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/Plynte.svg" />
+
+    <!-- Theme init before paint (no FOUC); also drops the no-js class. -->
+    <script is:inline>
+      (function () {
+        const el = document.documentElement;
+        el.classList.remove('no-js');
+        try {
+          const stored = localStorage.getItem('plynte_theme');
+          el.dataset.theme =
+            stored || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+        } catch {
+          el.dataset.theme = 'dark';
+        }
+      })();
+    </script>
+
+    <SEO locale={locale} title={title} description={description} image={image} alternates={alternates} />
+    <JsonLd />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">{skipLabel}</a>
+    <MaintainerBanner locale={locale} />
+    <Navbar locale={locale} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer locale={locale} />
+
+    <!-- Scroll-reveal: progressive enhancement, reduced-motion safe. -->
+    <script>
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const els = document.querySelectorAll('[data-reveal]');
+      if (prefersReduced || !('IntersectionObserver' in window)) {
+        els.forEach((el) => el.classList.add('is-visible'));
+      } else {
+        const io = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                io.unobserve(entry.target);
+              }
+            });
+          },
+          { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+        );
+        els.forEach((el) => io.observe(el));
+      }
+    </script>
+
+    <!-- Vercel analytics (no-op outside production). -->
+    <script>
+      import { inject } from '@vercel/analytics';
+      import { injectSpeedInsights } from '@vercel/speed-insights';
+      inject();
+      injectSpeedInsights();
+    </script>
+  </body>
+</html>

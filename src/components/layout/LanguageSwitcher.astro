@@ -1,0 +1,47 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { localeAlternates } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const norm = (p: string) => (p !== '/' && p.endsWith('/') ? p.slice(0, -1) : p);
+const alt = localeAlternates(norm(Astro.url.pathname));
+
+// langToggle shows the OTHER language (es -> "EN", en -> "ES").
+const targetHref = locale === 'es' ? alt.en : alt.es;
+const targetLabel = locale === 'es' ? 'EN' : 'ES';
+const targetLang = locale === 'es' ? 'en' : 'es';
+const ariaLabel = locale === 'es' ? 'Switch language to English' : 'Cambiar idioma a Español';
+---
+
+<a class="lang-toggle" href={targetHref} hreflang={targetLang} aria-label={ariaLabel}>
+  {targetLabel}
+</a>
+
+<style>
+  .lang-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding-inline: var(--space-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    letter-spacing: var(--ls-label);
+    color: var(--text-muted);
+    transition:
+      color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+  .lang-toggle:hover {
+    color: var(--text);
+    border-color: var(--border-accent);
+  }
+</style>

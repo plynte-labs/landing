@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import DocLayout from '@/layouts/DocLayout.astro';
+import { localizePath, contentAlternates } from '@/i18n/utils';
+
+export async function getStaticPaths() {
+  const isProd = import.meta.env.PROD;
+  const posts = (await getCollection('news')).filter(
+    (p) => p.data.locale === 'en' && (!isProd || !p.data.draft)
+  );
+  return posts.map((entry) => ({
+    params: { slug: entry.id.replace(/^en\//, '') },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const locale = 'en';
+const slug = entry.id.replace(/^en\//, '');
+const isProd = import.meta.env.PROD;
+const siblingExists = (await getCollection('news')).some(
+  (p) => p.data.locale === 'es' && p.id.replace(/^es\//, '') === slug && (!isProd || !p.data.draft)
+);
+const alternates = contentAlternates({ collection: 'news', slug, locale, siblingExists });
+---
+
+<DocLayout
+  locale={locale}
+  title={entry.data.title}
+  description={entry.data.description}
+  pubDate={entry.data.pubDate}
+  eyebrow="News"
+  backHref={localizePath('/news', locale)}
+  backLabel="News"
+  alternates={alternates}
+>
+  <Content />
+</DocLayout>

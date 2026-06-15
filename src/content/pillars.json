@@ -1,0 +1,66 @@
+[
+  {
+    "id": "local-first",
+    "key": "local-first",
+    "icon": "💻",
+    "order": 1,
+    "copy": {
+      "es": {
+        "title": "Local First",
+        "desc": "Todo corre en tu máquina. Sin dependencia de la nube, sin latencia, privacidad total."
+      },
+      "en": {
+        "title": "Local First",
+        "desc": "Everything runs on your machine. No cloud dependency, no latency, full privacy."
+      }
+    }
+  },
+  {
+    "id": "mit-license",
+    "key": "mit-license",
+    "icon": "📜",
+    "order": 2,
+    "copy": {
+      "es": {
+        "title": "Licencia MIT",
+        "desc": "Todos nuestros proyectos son open source bajo licencia MIT. Usalos, forkearlos, construí con ellos."
+      },
+      "en": {
+        "title": "MIT License",
+        "desc": "All our projects are open source under the MIT license. Use them, fork them, build with them."
+      }
+    }
+  },
+  {
+    "id": "ci-cd",
+    "key": "ci-cd",
+    "icon": "🔄",
+    "order": 3,
+    "copy": {
+      "es": {
+        "title": "CI/CD",
+        "desc": "Los proyectos listos para release usan checks automatizados de linting, pruebas, build y entrega antes de su promoción pública."
+      },
+      "en": {
+        "title": "CI/CD",
+        "desc": "Release-ready projects use automated checks for linting, testing, building, and delivery before public promotion."
+      }
+    }
+  },
+  {
+    "id": "hardware-acceleration",
+    "key": "hardware-acceleration",
+    "icon": "⚡",
+    "order": 4,
+    "copy": {
+      "es": {
+        "title": "Aceleración por Hardware",
+        "desc": "Aprovechando GPU y hardware de IA local para máximo rendimiento."
+      },
+      "en": {
+        "title": "Hardware Acceleration",
+        "desc": "Leveraging GPU and local AI hardware for maximum performance."
+      }
+    }
+  }
+]

@@ -1,0 +1,99 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import PillarIcon from '@/components/ui/PillarIcon.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+// The grid below is a deliberate 2x2 — it expects exactly 4 pillars. Adding a
+// 5th would leave an orphaned row; revisit the grid if the set ever changes.
+const pillars = (await getCollection('pillars')).sort((a, b) => a.data.order - b.data.order);
+const eyebrow = locale === 'es' ? '02 / Arquitectura' : '02 / Architecture';
+---
+
+<section id="architecture" class="section architecture" aria-labelledby="architecture-heading">
+  <div class="container">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id="architecture-heading" class="section__heading">{t('architecture.heading')}</h2>
+
+    <ul class="architecture__grid">
+      {
+        pillars.map((pillar) => {
+          const c = pillar.data.copy[locale];
+          return (
+            <li class="architecture__item" data-reveal>
+              <span class="architecture__icon" aria-hidden="true">
+                <PillarIcon name={pillar.data.key} />
+              </span>
+              <div>
+                <h3 class="architecture__title">{c.title}</h3>
+                <p class="architecture__desc measure">{c.desc}</p>
+              </div>
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .section__heading {
+    font-size: var(--fs-2xl);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-10);
+  }
+  .architecture__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8) var(--space-12);
+  }
+  .architecture__item {
+    display: flex;
+    gap: var(--space-5);
+    align-items: flex-start;
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-subtle);
+    position: relative;
+  }
+  .architecture__item::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: var(--space-8);
+    height: 1px;
+    background: var(--brand);
+  }
+  .architecture__icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    color: var(--brand-text);
+  }
+  .architecture__title {
+    font-size: var(--fs-lg);
+    margin-bottom: var(--space-2);
+  }
+  .architecture__desc {
+    color: var(--text-secondary);
+    line-height: var(--lh-body);
+  }
+  @media (max-width: 640px) {
+    .architecture__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

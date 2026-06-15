@@ -1,0 +1,65 @@
+---
+import { useTranslations, localeAlternates } from '@/i18n/utils';
+import type { Locale } from '@/i18n/ui';
+import { SITE, OG_IMAGE, STATIC_META, OG_LOCALE } from '@/data/seo';
+
+interface Props {
+  locale: Locale;
+  title?: string;
+  description?: string;
+  image?: string;
+  /** Explicit cross-locale paths. Use for content pages whose translated slug
+   *  may differ or be missing; omit a locale to suppress its hreflang. */
+  alternates?: Partial<Record<Locale, string>>;
+}
+
+const { locale, title, description, image, alternates } = Astro.props;
+const t = useTranslations(locale);
+
+// Canonical, trailing-slash-free paths (home -> ''), so canonical, hreflang and
+// the sitemap (serialized to match) all agree byte-for-byte.
+const norm = (p: string) => (p === '/' ? '' : p.replace(/\/$/, ''));
+const pathname = norm(Astro.url.pathname);
+
+const alt = alternates ?? localeAlternates(Astro.url.pathname);
+const altEs = alt.es != null ? `${SITE}${norm(alt.es)}` : undefined;
+const altEn = alt.en != null ? `${SITE}${norm(alt.en)}` : undefined;
+const xDefault = altEs ?? altEn;
+
+// Home keeps the brand title verbatim; inner pages get the " | Plynte Labs" suffix.
+const pageTitle = title ? `${title} | ${STATIC_META.siteName}` : t('seo.title');
+const pageDescription = description ?? t('seo.description');
+const ogImage = image ?? OG_IMAGE;
+const canonical = `${SITE}${pathname}`;
+---
+
+<title>{pageTitle}</title>
+<meta name="description" content={pageDescription} />
+<meta name="keywords" content={STATIC_META.keywords} />
+<meta name="author" content={STATIC_META.author} />
+<meta name="theme-color" content={STATIC_META.themeColor} />
+<meta name="geo.region" content={STATIC_META.geoRegion} />
+<meta name="geo.placename" content={STATIC_META.geoPlacename} />
+
+<link rel="canonical" href={canonical} />
+{altEs && <link rel="alternate" hreflang="es" href={altEs} />}
+{altEn && <link rel="alternate" hreflang="en" href={altEn} />}
+{xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:image:width" content={STATIC_META.ogImageW} />
+<meta property="og:image:height" content={STATIC_META.ogImageH} />
+<meta property="og:locale" content={OG_LOCALE[locale]} />
+<meta property="og:site_name" content={STATIC_META.siteName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonical} />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDescription} />
+<meta name="twitter:image" content={ogImage} />

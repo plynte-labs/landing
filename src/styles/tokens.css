@@ -1,0 +1,205 @@
+/* ==========================================================================
+   Plynte Labs — Design Tokens
+   Two-tier system: primitive ramps (raw values, never used directly in
+   components) -> semantic tokens (what components consume). Dark-first with a
+   real light theme; both themes share one contract, only the values flip.
+   ========================================================================== */
+
+:root {
+  /* --- Primitive ramps -------------------------------------------------- */
+
+  /* Neutral — cool slate, not pure black. The structural substrate. */
+  --slate-950: #0b0e11;
+  --slate-900: #11151a;
+  --slate-850: #161b22;
+  --slate-800: #1c232b;
+  --slate-700: #2a333d;
+  --slate-600: #3a4651;
+  --slate-400: #6e7b88;
+  --slate-350: #808d9a;  /* muted text floor (dark) — clears WCAG AA on surfaces */
+  --slate-300: #93a1ae;
+  --slate-200: #c2cbd3;
+  --slate-100: #e6ebef;
+  --slate-50: #f5f7f9;
+
+  /* Brand green — oscilloscope/instrument, pulled off acid. */
+  --green-300: #7fe6a0;
+  --green-400: #44d07e;
+  --green-500: #2fb968;
+  --green-600: #1f9a55;
+  --green-700: #167a43;  /* light-theme text/CTA green — clears WCAG AA on white */
+
+  /* Cyan — second axis: data / real-time / audio. */
+  --cyan-300: #6fe3e0;
+  --cyan-400: #2dc8ce;
+  --cyan-500: #17a6b0;
+
+  /* Amber — single warning channel (status, coming-soon). */
+  --amber-400: #e8b23a;
+  --amber-500: #c9912a;
+
+  /* Red — error only. */
+  --red-400: #f2645a;
+  --red-500: #d8473d;
+
+  /* --- Typography ------------------------------------------------------- */
+  --font-display: 'Space Grotesk', 'DM Sans', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.875rem;
+  --fs-base: 1rem;
+  --fs-md: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+  --fs-lg: clamp(1.25rem, 1.15rem + 0.5vw, 1.5rem);
+  --fs-xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);
+  --fs-2xl: clamp(1.9375rem, 1.6rem + 1.7vw, 2.75rem);
+  --fs-3xl: clamp(2.5rem, 2rem + 2.6vw, 3.75rem);
+  --fs-display: clamp(3rem, 2.2rem + 4.2vw, 5.5rem);
+
+  --lh-tight: 1.04;
+  --lh-heading: 1.14;
+  --lh-snug: 1.35;
+  --lh-body: 1.6;
+
+  --ls-display: -0.02em;
+  --ls-heading: -0.012em;
+  --ls-label: 0.06em;
+
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* --- Spacing ---------------------------------------------------------- */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --section-py: clamp(4rem, 3rem + 6vw, 8rem);
+  --section-px: clamp(1.25rem, 0.5rem + 3vw, 2.5rem);
+  --content-max: 72rem;
+  --content-wide: 84rem;
+  --measure: 66ch;
+
+  /* --- Radii ------------------------------------------------------------ */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+  --radius-none: 0;
+
+  /* --- Motion ----------------------------------------------------------- */
+  --dur-fast: 120ms;
+  --dur-base: 200ms;
+  --dur-slow: 320ms;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --lift: translateY(-2px);
+}
+
+/* ==========================================================================
+   Semantic tokens — DARK (default)
+   ========================================================================== */
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --bg: var(--slate-900);
+  --bg-deep: var(--slate-950);
+  --surface: var(--slate-850);
+  --surface-raised: var(--slate-800);
+  --surface-overlay: rgba(22, 27, 34, 0.72);
+
+  /* Borders & lines */
+  --border: var(--slate-700);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-accent: rgba(68, 208, 126, 0.34);
+  --grid-line: rgba(127, 230, 160, 0.07);
+
+  /* Text */
+  --text: var(--slate-100);
+  --text-secondary: var(--slate-300);
+  --text-muted: var(--slate-350);
+  --text-on-brand: var(--slate-950);
+
+  /* Brand / accent roles */
+  --brand: var(--green-400);
+  --brand-hover: var(--green-500);
+  --brand-text: var(--green-300);
+  --accent: var(--cyan-400);
+  --accent-text: var(--cyan-300);
+
+  /* State */
+  --success: var(--green-400);
+  --warning: var(--amber-400);
+  --danger: var(--red-400);
+
+  /* Focus */
+  --focus-ring: var(--green-300);
+  --focus-ring-offset: var(--bg);
+
+  /* Elevation — neutral, soft, dark-tuned */
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.24);
+  --elev-2: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.24);
+  --elev-3: 0 12px 32px rgba(0, 0, 0, 0.46), 0 4px 8px rgba(0, 0, 0, 0.28);
+
+  /* Signal glow — reserved for live status, focus, primary CTA hover only */
+  --glow-brand: 0 0 0 1px var(--border-accent), 0 0 24px -6px rgba(68, 208, 126, 0.45);
+  --glow-accent: 0 0 0 1px rgba(45, 200, 206, 0.34), 0 0 24px -6px rgba(45, 200, 206, 0.4);
+  --ring-inset: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* ==========================================================================
+   Semantic tokens — LIGHT
+   ========================================================================== */
+[data-theme='light'] {
+  color-scheme: light;
+
+  --bg: var(--slate-50);
+  --bg-deep: #ffffff;
+  --surface: #ffffff;
+  --surface-raised: var(--slate-50);
+  --surface-overlay: rgba(255, 255, 255, 0.82);
+
+  --border: #d8dee4;
+  --border-subtle: rgba(11, 14, 17, 0.08);
+  --border-accent: rgba(31, 154, 85, 0.4);
+  --grid-line: rgba(31, 154, 85, 0.14);
+
+  --text: var(--slate-950);
+  --text-secondary: #3a4651;
+  --text-muted: #56636f;
+  --text-on-brand: #ffffff;
+
+  --brand: var(--green-700);
+  --brand-hover: var(--green-600);
+  --brand-text: var(--green-700);
+  --accent: var(--cyan-500);
+  --accent-text: var(--cyan-500);
+
+  --success: var(--green-700);
+  --warning: #9a6f15;
+  --danger: var(--red-500);
+
+  --focus-ring: var(--green-700);
+  --focus-ring-offset: var(--bg);
+
+  --elev-1: 0 1px 2px rgba(11, 14, 17, 0.08), 0 1px 1px rgba(11, 14, 17, 0.04);
+  --elev-2: 0 4px 12px rgba(11, 14, 17, 0.1), 0 2px 4px rgba(11, 14, 17, 0.06);
+  --elev-3: 0 12px 32px rgba(11, 14, 17, 0.12), 0 4px 8px rgba(11, 14, 17, 0.08);
+  --ring-inset: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}

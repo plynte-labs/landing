@@ -1,0 +1,106 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { useTranslations, localizePath } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const docsLabel = locale === 'es' ? 'Documentación' : 'Docs';
+const newsLabel = locale === 'es' ? 'Novedades' : 'News';
+const links = [
+  { label: docsLabel, href: localizePath('/docs', locale), external: false },
+  { label: newsLabel, href: localizePath('/news', locale), external: false },
+  { label: t('footer.orgLink'), href: 'https://github.com/plynte-labs', external: true },
+];
+---
+
+<footer class="footer">
+  <div class="container footer__inner">
+    <div class="footer__brand">
+      <a class="footer__logo" href={localizePath('/', locale)} aria-label="Plynte Labs">
+        <img src="/Plynte.svg" alt="" width="28" height="28" />
+        <span>Plynte Labs</span>
+      </a>
+      <p class="footer__tagline">{t('footer.builtWith')}</p>
+    </div>
+
+    <nav class="footer__nav" aria-label={locale === 'es' ? 'Enlaces del pie' : 'Footer links'}>
+      {
+        links.map((link) => (
+          <a
+            class="footer__link"
+            href={link.href}
+            {...link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {}}
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+
+  <div class="container footer__legal">
+    <span>© 2026 Plynte Labs · {t('footer.license')}</span>
+    <span class="footer__maintainer">{t('navbar.maintainer')}</span>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--border-subtle);
+    background: var(--bg-deep);
+    padding-block: var(--space-12) var(--space-8);
+    margin-top: var(--space-24);
+  }
+  .footer__inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .footer__logo {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-display);
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-lg);
+    color: var(--text);
+  }
+  .footer__tagline {
+    margin-top: var(--space-3);
+    font-size: var(--fs-sm);
+    color: var(--text-muted);
+  }
+  .footer__nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+  .footer__link {
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-medium);
+    color: var(--text-secondary);
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .footer__link:hover {
+    color: var(--brand-text);
+  }
+  .footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-3);
+    margin-top: var(--space-10);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--text-muted);
+  }
+</style>

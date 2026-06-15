@@ -1,0 +1,127 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import PillarIcon from '@/components/ui/PillarIcon.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const eyebrow = locale === 'es' ? '04 / Misión' : '04 / Mission';
+const maintainerName = t('mission.maintainer.name');
+const maintainerRole = t('mission.maintainer.role');
+const maintainerGithub = t('mission.maintainer.github');
+---
+
+<section id="mission" class="section" aria-labelledby="mission-heading">
+  <div class="container mission__inner">
+    <div class="mission__main" data-reveal>
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 id="mission-heading" class="section__heading">{t('mission.heading')}</h2>
+      <p class="mission__statement measure">{t('mission.statement')}</p>
+    </div>
+
+    <aside class="mission__aside">
+      <div class="mission__notice" data-reveal>
+        <span class="mission__notice-mark" aria-hidden="true">
+          <PillarIcon name="mit-license" />
+        </span>
+        <p>{t('mission.mitNotice')}</p>
+      </div>
+
+      <div class="mission__maintainer" data-reveal>
+        <p class="mission__role">{maintainerRole}</p>
+        <p class="mission__name">{maintainerName}</p>
+        <a class="mission__github" href={maintainerGithub} target="_blank" rel="noopener noreferrer">
+          GitHub
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<style>
+  .section__heading {
+    font-size: var(--fs-2xl);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+  .mission__inner {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: var(--space-16);
+    align-items: start;
+  }
+  .mission__statement {
+    font-size: var(--fs-md);
+    line-height: var(--lh-body);
+    color: var(--text-secondary);
+  }
+  .mission__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+  .mission__notice {
+    display: flex;
+    gap: var(--space-4);
+    padding: var(--space-6);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--brand);
+    border-radius: var(--radius-md);
+  }
+  .mission__notice p {
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+  }
+  .mission__notice-mark {
+    flex-shrink: 0;
+    color: var(--brand-text);
+    line-height: 0;
+  }
+  .mission__maintainer {
+    padding: var(--space-6);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+  }
+  .mission__role {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .mission__name {
+    font-family: var(--font-display);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    margin-block: var(--space-2) var(--space-4);
+  }
+  .mission__github {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 44px;
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-sm);
+    color: var(--brand-text);
+  }
+  .mission__github span {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .mission__github:hover span {
+    transform: translateX(3px);
+  }
+  @media (max-width: 760px) {
+    .mission__inner {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+  }
+</style>
