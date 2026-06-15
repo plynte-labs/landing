@@ -1,0 +1,51 @@
+---
+// Decorative blueprint lattice — the hero's "engineering sheet" backdrop.
+// Pure static SVG, zero JS, aria-hidden. Replaces the old ParticleField.
+interface Props {
+  class?: string;
+}
+const { class: className } = Astro.props;
+---
+
+<svg
+  class:list={['lattice', className]}
+  viewBox="0 0 1200 600"
+  preserveAspectRatio="xMidYMid slice"
+  aria-hidden="true"
+  focusable="false"
+>
+  <defs>
+    <pattern id="lattice-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0V40" fill="none" stroke="var(--grid-line)" stroke-width="1"></path>
+    </pattern>
+  </defs>
+  <rect width="1200" height="600" fill="url(#lattice-grid)"></rect>
+
+  <!-- Registration crosshairs -->
+  <g stroke="var(--brand)" stroke-width="1.25" opacity="0.55">
+    <path d="M160 120h16M168 112v16"></path>
+    <path d="M1040 200h16M1048 192v16"></path>
+    <path d="M320 460h16M328 452v16"></path>
+    <path d="M920 440h16M928 432v16"></path>
+  </g>
+
+  <!-- Coordinate labels -->
+  <g fill="var(--text-muted)" font-family="var(--font-mono)" font-size="11" opacity="0.5">
+    <text x="184" y="116">x160·y120</text>
+    <text x="936" y="436">node·440</text>
+    <text x="40" y="580">plynte · labs / blueprint</text>
+  </g>
+</svg>
+
+<style>
+  .lattice {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    -webkit-mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
+    mask-image: radial-gradient(ellipse 90% 80% at 50% 40%, #000 30%, transparent 78%);
+  }
+</style>

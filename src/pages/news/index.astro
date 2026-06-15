@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CollectionIndex from '@/components/CollectionIndex.astro';
+
+const locale = 'es';
+---
+
+<BaseLayout
+  locale={locale}
+  title="Novedades"
+  description="Anuncios y novedades del ecosistema open-source de Plynte Labs."
+>
+  <CollectionIndex
+    locale={locale}
+    collection="news"
+    heading="Novedades"
+    eyebrow="Blog"
+    emptyLabel="Todavía no hay novedades."
+  />
+</BaseLayout>

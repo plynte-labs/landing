@@ -1,0 +1,20 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import CollectionIndex from '@/components/CollectionIndex.astro';
+
+const locale = 'en';
+---
+
+<BaseLayout
+  locale={locale}
+  title="Documentation"
+  description="Guides and documentation for Plynte Labs' open-source projects."
+>
+  <CollectionIndex
+    locale={locale}
+    collection="docs"
+    heading="Documentation"
+    eyebrow="Guides"
+    emptyLabel="Documentation is coming soon."
+  />
+</BaseLayout>

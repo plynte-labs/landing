@@ -1,0 +1,162 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const eyebrow = locale === 'es' ? '01 / Ecosistema' : '01 / Ecosystem';
+const websiteLabel = locale === 'es' ? 'Sitio web' : 'Visit website';
+const liveLabel = locale === 'es' ? 'Activo' : 'Live';
+---
+
+<section id="ecosystem" class="section" aria-labelledby="ecosystem-heading">
+  <div class="container">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id="ecosystem-heading" class="section__heading">{t('ecosystem.heading')}</h2>
+
+    <ul class="ecosystem__grid">
+      {
+        projects.map((project) => {
+          const c = project.data.copy[locale];
+          const isLive = project.data.status === 'live';
+          const statusLabel = isLive ? liveLabel : t('ecosystem.comingSoon');
+          const link = project.data.github
+            ? { href: project.data.github, label: t('ecosystem.viewOnGithub') }
+            : project.data.website
+              ? { href: project.data.website, label: websiteLabel }
+              : null;
+          return (
+            <li class:list={['card', 'ecosystem__card', project.data.featured && 'is-featured']} data-reveal>
+              <div class="ecosystem__status">
+                <span class:list={['dot', isLive ? 'dot--live' : 'dot--soon']} aria-hidden="true" />
+                <span>{statusLabel}</span>
+              </div>
+              <h3 class="ecosystem__name">{c.name}</h3>
+              <p class="ecosystem__desc measure">{c.desc}</p>
+              <ul class="ecosystem__tech" aria-label={locale === 'es' ? 'Tecnologías' : 'Tech stack'}>
+                {project.data.tech.map((tech) => (
+                  <li class="tag">{tech}</li>
+                ))}
+              </ul>
+              {link && (
+                <a class="ecosystem__link" href={link.href} target="_blank" rel="noopener noreferrer">
+                  {link.label}
+                  <span aria-hidden="true">→</span>
+                </a>
+              )}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .section__heading {
+    font-size: var(--fs-2xl);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-10);
+  }
+  .ecosystem__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    padding: var(--space-8);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elev-1), var(--ring-inset);
+    transition:
+      transform var(--dur-base) var(--ease-out),
+      box-shadow var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out);
+  }
+  .card:hover {
+    transform: var(--lift);
+    box-shadow: var(--elev-2), var(--ring-inset);
+  }
+  .ecosystem__card.is-featured {
+    grid-column: 1 / -1;
+    border-color: var(--border-accent);
+    box-shadow: var(--elev-1), var(--glow-brand);
+  }
+  .ecosystem__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+  }
+  .dot--live {
+    background: var(--brand);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);
+  }
+  .dot--soon {
+    background: transparent;
+    border: 1.5px solid var(--warning);
+  }
+  .ecosystem__name {
+    font-size: var(--fs-xl);
+  }
+  .ecosystem__desc {
+    color: var(--text-secondary);
+  }
+  .ecosystem__tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+  .tag {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-xs);
+    background: var(--surface-raised);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+  .ecosystem__link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: auto;
+    min-height: 44px;
+    font-weight: var(--fw-semibold);
+    font-size: var(--fs-sm);
+    color: var(--brand-text);
+  }
+  .ecosystem__link span {
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .ecosystem__link:hover span {
+    transform: translateX(3px);
+  }
+  @media (max-width: 640px) {
+    .ecosystem__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

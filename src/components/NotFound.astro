@@ -1,0 +1,68 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { useTranslations, localizePath } from '@/i18n/utils';
+import LinkButton from '@/components/ui/LinkButton.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const homeHref = localizePath('/', locale);
+const homeLabel = locale === 'es' ? 'Volver al inicio' : 'Back to home';
+---
+
+<section class="notfound">
+  <div class="container notfound__inner">
+    <p class="notfound__code" aria-hidden="true">404<span class="notfound__mark">+</span></p>
+    <h1 class="notfound__title">{t('notFound.title')}</h1>
+    <p class="notfound__desc measure">{t('notFound.description')}</p>
+    <div class="notfound__actions">
+      <LinkButton href="https://github.com/plynte-labs" external>{t('notFound.btnGithub')}</LinkButton>
+      <LinkButton href={homeHref} variant="secondary">{homeLabel}</LinkButton>
+    </div>
+  </div>
+</section>
+
+<style>
+  .notfound {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding-block: var(--section-py);
+  }
+  .notfound__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-5);
+  }
+  .notfound__code {
+    position: relative;
+    font-family: var(--font-mono);
+    font-size: var(--fs-display);
+    font-weight: var(--fw-medium);
+    color: var(--text-muted);
+    letter-spacing: 0.04em;
+  }
+  .notfound__mark {
+    color: var(--brand);
+    margin-left: 0.1em;
+    transform: translateY(-0.3em);
+    display: inline-block;
+  }
+  .notfound__title {
+    font-size: var(--fs-2xl);
+  }
+  .notfound__desc {
+    color: var(--text-secondary);
+    font-size: var(--fs-md);
+  }
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+</style>

@@ -1,0 +1,176 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { useTranslations } from '@/i18n/utils';
+import LinkButton from '@/components/ui/LinkButton.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+
+const eyebrow = locale === 'es' ? '03 / Contribuir' : '03 / Contribute';
+const steps = [t('contribute.step1'), t('contribute.step2'), t('contribute.step3'), t('contribute.step4')];
+const code = t('contribute.codeExample');
+const copyLabel = locale === 'es' ? 'Copiar' : 'Copy';
+const copiedLabel = locale === 'es' ? 'Copiado' : 'Copied';
+const codeCaption = locale === 'es' ? 'ejemplo · conventional commit' : 'example · conventional commit';
+---
+
+<section id="contribute" class="section" aria-labelledby="contribute-heading">
+  <div class="container">
+    <p class="eyebrow">{eyebrow}</p>
+    <h2 id="contribute-heading" class="section__heading">{t('contribute.heading')}</h2>
+
+    <div class="contribute__grid">
+      <ol class="contribute__steps">
+        {
+          steps.map((step, i) => (
+            <li class="contribute__step" data-reveal>
+              <span class="contribute__num" aria-hidden="true">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <p>{step}</p>
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="contribute__aside">
+        <figure class="contribute__code" data-reveal>
+          <figcaption class="contribute__code-caption">{codeCaption}</figcaption>
+          <pre><code>{code}</code></pre>
+          <button
+            class="contribute__copy"
+            type="button"
+            data-copy={code}
+            data-label={copyLabel}
+            data-copied={copiedLabel}
+            aria-label={copyLabel}
+          >
+            {copyLabel}
+          </button>
+        </figure>
+        <LinkButton href="https://github.com/plynte-labs" variant="secondary" external>
+          {t('contribute.githubLink')}
+        </LinkButton>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .section__heading {
+    font-size: var(--fs-2xl);
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-10);
+  }
+  .contribute__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-12);
+    align-items: start;
+  }
+  .contribute__steps {
+    display: flex;
+    flex-direction: column;
+  }
+  .contribute__step {
+    display: flex;
+    gap: var(--space-5);
+    align-items: baseline;
+    padding-block: var(--space-5);
+    border-top: 1px solid var(--border-subtle);
+  }
+  .contribute__step p {
+    color: var(--text-secondary);
+    font-size: var(--fs-md);
+  }
+  .contribute__num {
+    font-family: var(--font-mono);
+    font-size: var(--fs-lg);
+    font-weight: var(--fw-semibold);
+    color: var(--brand-text);
+    flex-shrink: 0;
+  }
+  .contribute__aside {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+    position: sticky;
+    top: 6rem;
+  }
+  .contribute__code {
+    position: relative;
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+  .contribute__code-caption {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-subtle);
+    background: color-mix(in srgb, var(--grid-line) 60%, transparent);
+  }
+  .contribute__code pre {
+    padding: var(--space-5) var(--space-4);
+    overflow-x: auto;
+  }
+  .contribute__code code {
+    font-size: var(--fs-sm);
+    color: var(--text);
+  }
+  .contribute__copy {
+    position: absolute;
+    top: var(--space-2);
+    right: var(--space-2);
+    min-height: 36px;
+    padding: var(--space-1) var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    color: var(--text-secondary);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs);
+    cursor: pointer;
+    transition: color var(--dur-base), border-color var(--dur-base);
+  }
+  .contribute__copy:hover {
+    color: var(--text);
+    border-color: var(--border-accent);
+  }
+  @media (max-width: 760px) {
+    .contribute__grid {
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+    }
+    .contribute__aside {
+      position: static;
+    }
+  }
+</style>
+
+<script>
+  document.querySelectorAll('.contribute__copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = btn.getAttribute('data-copy') ?? '';
+      const done = btn.getAttribute('data-copied') ?? 'Copied';
+      const label = btn.getAttribute('data-label') ?? 'Copy';
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = done;
+        setTimeout(() => {
+          btn.textContent = label;
+        }, 1600);
+      } catch {
+        /* clipboard unavailable */
+      }
+    });
+  });
+</script>

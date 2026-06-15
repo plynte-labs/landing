@@ -1,0 +1,20 @@
+---
+import type { Locale } from '@/i18n/ui';
+import HeroSection from '@/components/sections/HeroSection.astro';
+import EcosystemSection from '@/components/sections/EcosystemSection.astro';
+import ArchitectureSection from '@/components/sections/ArchitectureSection.astro';
+import ContributeSection from '@/components/sections/ContributeSection.astro';
+import MissionSection from '@/components/sections/MissionSection.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+---
+
+<HeroSection locale={locale} />
+<EcosystemSection locale={locale} />
+<ArchitectureSection locale={locale} />
+<ContributeSection locale={locale} />
+<MissionSection locale={locale} />

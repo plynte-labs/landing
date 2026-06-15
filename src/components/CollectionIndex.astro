@@ -1,0 +1,104 @@
+---
+import { getCollection } from 'astro:content';
+import type { Locale } from '@/i18n/ui';
+import { localizePath } from '@/i18n/utils';
+
+interface Props {
+  locale: Locale;
+  collection: 'docs' | 'news';
+  heading: string;
+  eyebrow: string;
+  emptyLabel: string;
+}
+
+const { locale, collection, heading, eyebrow, emptyLabel } = Astro.props;
+const isProd = import.meta.env.PROD;
+
+const entries = (await getCollection(collection))
+  .filter((entry) => entry.data.locale === locale && (!isProd || !entry.data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const base = localizePath(`/${collection}`, locale);
+const slugOf = (id: string) => id.replace(/^(es|en)\//, '');
+const fmt = (date: Date) =>
+  date.toLocaleDateString(locale === 'es' ? 'es-MX' : 'en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+---
+
+<section class="section">
+  <div class="container collection">
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 class="collection__heading">{heading}</h1>
+
+    {
+      entries.length === 0 ? (
+        <p class="collection__empty">{emptyLabel}</p>
+      ) : (
+        <ul class="collection__list">
+          {entries.map((entry) => (
+            <li class="collection__item" data-reveal>
+              <a class="collection__link" href={`${base}/${slugOf(entry.id)}`}>
+                <p class="collection__date">
+                  <time datetime={entry.data.pubDate.toISOString().slice(0, 10)}>{fmt(entry.data.pubDate)}</time>
+                </p>
+                <h2 class="collection__title">{entry.data.title}</h2>
+                <p class="collection__desc measure">{entry.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .collection {
+    max-width: 52rem;
+  }
+  .collection__heading {
+    font-size: var(--fs-3xl);
+    margin-block: var(--space-3) var(--space-12);
+  }
+  .collection__empty {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+  }
+  .collection__list {
+    display: flex;
+    flex-direction: column;
+  }
+  .collection__item {
+    border-top: 1px solid var(--border-subtle);
+  }
+  .collection__link {
+    display: block;
+    padding-block: var(--space-6);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .collection__link:hover {
+    transform: translateX(4px);
+  }
+  .collection__date {
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: var(--space-2);
+  }
+  .collection__title {
+    font-size: var(--fs-xl);
+    margin-bottom: var(--space-2);
+  }
+  .collection__link:hover .collection__title {
+    color: var(--brand-text);
+  }
+  .collection__desc {
+    color: var(--text-secondary);
+  }
+</style>

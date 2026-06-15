@@ -1,0 +1,88 @@
+---
+import type { Locale } from '@/i18n/ui';
+import { useTranslations, localizePath } from '@/i18n/utils';
+import BlueprintLattice from '@/components/ui/BlueprintLattice.astro';
+import LinkButton from '@/components/ui/LinkButton.astro';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = useTranslations(locale);
+const homeBase = localizePath('/', locale);
+---
+
+<section id="hero" class="hero" aria-labelledby="hero-title">
+  <BlueprintLattice />
+  <div class="container hero__inner" data-reveal>
+    <p class="hero__kicker">
+      <img src="/Plynte.svg" alt="" width="22" height="22" />
+      <span>Plynte Labs</span>
+      <span class="hero__badge">{t('hero.mitBadge')}</span>
+    </p>
+    <h1 id="hero-title" class="hero__title">{t('hero.subtagline')}</h1>
+    <p class="hero__tagline measure">{t('hero.tagline')}</p>
+    <div class="hero__actions">
+      <LinkButton href={`${homeBase}#ecosystem`}>{t('hero.cta')}</LinkButton>
+      <LinkButton href="https://github.com/plynte-labs" variant="secondary" external>GitHub</LinkButton>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-deep);
+    padding-block: clamp(5rem, 4rem + 8vw, 10rem);
+    background-image: radial-gradient(ellipse 80% 70% at 50% 0%, color-mix(in srgb, var(--brand) 7%, transparent), transparent 70%);
+  }
+  .hero__inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+  }
+  .hero__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-3);
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+    color: var(--text-secondary);
+  }
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-pill);
+    background: var(--brand);
+    color: var(--text-on-brand);
+    font-size: var(--fs-xs);
+    font-weight: var(--fw-semibold);
+    letter-spacing: 0.02em;
+  }
+  .hero__title {
+    font-size: var(--fs-display);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-display);
+    font-weight: var(--fw-bold);
+    max-width: 16ch;
+  }
+  .hero__tagline {
+    font-size: var(--fs-md);
+    line-height: var(--lh-body);
+    color: var(--text-secondary);
+  }
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+    margin-top: var(--space-2);
+  }
+</style>

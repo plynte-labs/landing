@@ -1,0 +1,62 @@
+[
+  {
+    "id": "brick-draw",
+    "key": "brick-draw",
+    "name": "Brick Draw",
+    "status": "live",
+    "github": "https://github.com/plynte-labs/brick-draw",
+    "tech": ["TypeScript", "Canvas", "React"],
+    "order": 1,
+    "featured": true,
+    "copy": {
+      "es": {
+        "name": "Brick Draw",
+        "desc": "Aplicación de dibujo de alto rendimiento construida con TypeScript, Canvas y React. Diseñada para artistas y streamers que necesitan herramientas rápidas y sin fricción."
+      },
+      "en": {
+        "name": "Brick Draw",
+        "desc": "High-performance drawing app built with TypeScript, Canvas, and React. Designed for artists and streamers who need fast, frictionless tools."
+      }
+    }
+  },
+  {
+    "id": "liveaudio",
+    "key": "liveaudio",
+    "name": "LiveAudio",
+    "status": "live",
+    "github": "https://github.com/plynte-labs/LiveAudio",
+    "tech": ["Whisper", "Python", "Real-time"],
+    "order": 2,
+    "featured": false,
+    "copy": {
+      "es": {
+        "name": "LiveAudio",
+        "desc": "Procesamiento de audio en tiempo real con Whisper, Python e integración OBS. Infraestructura de audio local impulsada por IA para streaming en vivo."
+      },
+      "en": {
+        "name": "LiveAudio",
+        "desc": "Local real-time ASR subtitles with Whisper, Python, OBS, and WebSocket integration. AI-driven audio infrastructure for live streaming."
+      }
+    }
+  },
+  {
+    "id": "opencohost",
+    "key": "opencohost",
+    "name": "OpenCohost",
+    "status": "coming-soon",
+    "website": "https://www.opencohost.com",
+    "tech": ["Python", "Ollama", "Real-time", "YouTube/Twitch"],
+    "order": 3,
+    "featured": false,
+    "copy": {
+      "es": {
+        "name": "OpenCohost",
+        "desc": "Asistente de voz local para streamers construido con Python y Ollama. Procesamiento 100% en tu máquina, integración con YouTube/Twitch."
+      },
+      "en": {
+        "name": "OpenCohost",
+        "desc": "Local voice assistant for streamers built with Python and Ollama. 100% local processing on your machine, YouTube/Twitch integration."
+      }
+    }
+  }
+]

@@ -1,0 +1,12 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import NotFound from '@/components/NotFound.astro';
+import { useTranslations } from '@/i18n/utils';
+
+const locale = 'en';
+const t = useTranslations(locale);
+---
+
+<BaseLayout locale={locale} title={t('notFound.title')} description={t('notFound.description')}>
+  <NotFound locale={locale} />
+</BaseLayout>
