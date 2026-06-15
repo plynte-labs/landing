@@ -11,14 +11,15 @@ interface Props {
 const { locale } = Astro.props;
 const t = useTranslations(locale);
 const homeBase = localizePath('/', locale);
+const labLabel = locale === 'es' ? 'Laboratorio de software open-source' : 'Open-source software laboratory';
 ---
 
 <section id="hero" class="hero" aria-labelledby="hero-title">
   <BlueprintLattice />
   <div class="container hero__inner" data-reveal>
+    <img class="hero__logo" src="/plynte%20logo2.png" alt="Plynte Labs" width="104" height="104" />
     <p class="hero__kicker">
-      <img src="/Plynte.svg" alt="" width="22" height="22" />
-      <span>Plynte Labs</span>
+      <span>{labLabel}</span>
       <span class="hero__badge">{t('hero.mitBadge')}</span>
     </p>
     <h1 id="hero-title" class="hero__title">{t('hero.subtagline')}</h1>
@@ -45,6 +46,11 @@ const homeBase = localizePath('/', locale);
     flex-direction: column;
     align-items: flex-start;
     gap: var(--space-6);
+  }
+  .hero__logo {
+    width: 104px;
+    height: auto;
+    margin-bottom: calc(var(--space-2) * -1);
   }
   .hero__kicker {
     display: inline-flex;
