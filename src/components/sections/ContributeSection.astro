@@ -75,6 +75,7 @@ const codeCaption = locale === 'es' ? 'ejemplo · conventional commit' : 'exampl
   .contribute__steps {
     display: flex;
     flex-direction: column;
+    min-width: 0;
   }
   .contribute__step {
     display: flex;
@@ -100,6 +101,10 @@ const codeCaption = locale === 'es' ? 'ejemplo · conventional commit' : 'exampl
     gap: var(--space-6);
     position: sticky;
     top: 6rem;
+    /* Grid items default to min-width:auto and refuse to shrink below their
+       content (the long code line). min-width:0 lets the track shrink so the
+       <pre> overflow-x:auto contains the scroll instead of widening the page. */
+    min-width: 0;
   }
   .contribute__code {
     position: relative;
