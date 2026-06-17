@@ -8,14 +8,15 @@ order: 1
 ---
 
 Plynte Labs is an open-source software laboratory focused on high-performance
-productivity tooling and localized, AI-driven audio infrastructure. Everything
-we build ships under the MIT license.
+productivity tooling and localized, AI-driven audio infrastructure. Public
+open-source repositories use MIT unless a repository states otherwise.
 
 ## Our principles
 
 - **Local first.** Processing happens on your machine: no cloud, no latency,
   full privacy.
-- **Genuinely open source.** MIT-licensed code. Use it, fork it, build with it.
+- **Genuinely open source.** Public repositories use MIT by default unless
+  a repository states otherwise. Use them, fork them, build with them.
 - **Hardware acceleration.** We lean on GPU and local AI hardware for maximum
   performance.
 

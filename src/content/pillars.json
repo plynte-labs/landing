@@ -23,11 +23,11 @@
     "copy": {
       "es": {
         "title": "Licencia MIT",
-        "desc": "Todos nuestros proyectos son open source bajo licencia MIT. Usalos, forkearlos, construí con ellos."
+        "desc": "Los repositorios open-source públicos usan licencia MIT salvo que el repositorio indique lo contrario. Usalos, forkearlos, construí con ellos."
       },
       "en": {
         "title": "MIT License",
-        "desc": "All our projects are open source under the MIT license. Use them, fork them, build with them."
+        "desc": "Public open-source repositories use MIT unless a repository states otherwise. Use them, fork them, build with them."
       }
     }
   },
