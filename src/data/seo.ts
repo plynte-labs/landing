@@ -33,7 +33,7 @@ export const JSON_LD_GRAPH = {
       url: 'https://plynte.com',
       logo: 'https://plynte.com/plynte%20logo2.png',
       description:
-        'An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure under the MIT license.',
+        'An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure.',
       foundingDate: '2026',
       sameAs: ['https://github.com/plynte-labs'],
     },

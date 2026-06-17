@@ -49,10 +49,10 @@ export const ui: Record<Locale, TranslationDict> = {
     },
     hero: {
       tagline:
-        'Un laboratorio de software open-source dedicado a crear herramientas de productividad de alto rendimiento e infraestructura de audio local impulsada por IA, para artistas y streamers bajo licencia MIT.',
+        'Un laboratorio de software open-source dedicado a crear herramientas de productividad de alto rendimiento e infraestructura de audio local impulsada por IA para artistas y streamers.',
       subtagline: 'Forgeá, creá, compartí. Sin ataduras.',
       cta: 'Explorar Proyectos',
-      mitBadge: 'MIT Licensed',
+      mitBadge: 'OSS público: MIT por defecto',
     },
     ecosystem: {
       heading: 'Nuestros Proyectos',
@@ -79,7 +79,7 @@ export const ui: Record<Locale, TranslationDict> = {
       },
       'mit-license': {
         title: 'Licencia MIT',
-        desc: 'Todos nuestros proyectos son open source bajo licencia MIT. Usalos, forkearlos, construí con ellos.',
+        desc: 'Los repositorios open-source públicos usan licencia MIT salvo que el repositorio indique lo contrario. Usalos, forkearlos, construí con ellos.',
       },
       'ci-cd': {
         title: 'CI/CD',
@@ -102,9 +102,9 @@ export const ui: Record<Locale, TranslationDict> = {
     mission: {
       heading: 'Nuestra Misión',
       statement:
-        'Creemos en el software open-source como motor de innovación. Cada línea de código que publicamos bajo licencia MIT es una invitación a construir juntos, sin barreras ni letras chicas. Nuestro compromiso es con la comunidad: herramientas libres, documentación clara y un ecosistema donde cualquiera pueda aprender, contribuir y crear.',
+        'Creemos en el software open-source como motor de innovación. Cada repositorio público que liberamos invita a construir juntos, sin barreras ni letras chicas. Nuestro compromiso es con la comunidad: herramientas libres, documentación clara y un ecosistema donde cualquiera pueda aprender, contribuir y crear.',
       mitNotice:
-        'Todos nuestros proyectos están publicados bajo la licencia MIT. Usalos, modificalos, compartilos.',
+        'Los repositorios open-source públicos usan licencia MIT salvo que el repositorio indique lo contrario. Usalos, modificalos, compartilos.',
       maintainer: {
         name: 'Gustavo Francisco (FranGuh)',
         role: 'Mantenedor Principal & Ingeniero de Software',
@@ -119,7 +119,7 @@ export const ui: Record<Locale, TranslationDict> = {
     seo: {
       title: 'Plynte Labs — Laboratorio de Software Open-Source',
       description:
-        'Un laboratorio de software open-source dedicado a la ingeniería de herramientas de productividad de alto rendimiento e infraestructura de audio local impulsada por IA, bajo licencia MIT.',
+        'Un laboratorio de software open-source dedicado a la ingeniería de herramientas de productividad de alto rendimiento e infraestructura de audio local impulsada por IA.',
     },
     notFound: {
       title: 'Página no encontrada',
@@ -140,10 +140,10 @@ export const ui: Record<Locale, TranslationDict> = {
     },
     hero: {
       tagline:
-        'An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure, tools for artists and streamers under the MIT license.',
+        'An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure for artists and streamers.',
       subtagline: 'Forge, create, share. No strings attached.',
       cta: 'Explore Projects',
-      mitBadge: 'MIT Licensed',
+      mitBadge: 'Public OSS: MIT by default',
     },
     ecosystem: {
       heading: 'Our Projects',
@@ -170,7 +170,7 @@ export const ui: Record<Locale, TranslationDict> = {
       },
       'mit-license': {
         title: 'MIT License',
-        desc: 'All our projects are open source under the MIT license. Use them, fork them, build with them.',
+        desc: 'Public open-source repositories use MIT unless a repository states otherwise. Use them, fork them, build with them.',
       },
       'ci-cd': {
         title: 'CI/CD',
@@ -193,9 +193,9 @@ export const ui: Record<Locale, TranslationDict> = {
     mission: {
       heading: 'Our Mission',
       statement:
-        'We believe in open-source software as an engine for innovation. Every line of code we publish under the MIT license is an invitation to build together, without barriers or fine print. Our commitment is to the community: free tools, clear documentation, and an ecosystem where anyone can learn, contribute, and create.',
+        'We believe in open-source software as an engine for innovation. Every public repository we release is an invitation to build together, without barriers or fine print. Our commitment is to the community: free tools, clear documentation, and an ecosystem where anyone can learn, contribute, and create.',
       mitNotice:
-        'All our projects are published under the MIT license. Use them, modify them, share them.',
+        'Public open-source repositories use MIT unless a repository states otherwise. Use them, modify them, share them.',
       maintainer: {
         name: 'Gustavo Francisco (FranGuh)',
         role: 'Lead Maintainer & Software Engineer',
@@ -210,7 +210,7 @@ export const ui: Record<Locale, TranslationDict> = {
     seo: {
       title: 'Plynte Labs — Open-Source Software Laboratory',
       description:
-        'An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure under the MIT license.',
+        'An open-source software laboratory dedicated to engineering high-performance productivity tooling and localized AI-driven audio infrastructure.',
     },
     notFound: {
       title: 'Page not found',
