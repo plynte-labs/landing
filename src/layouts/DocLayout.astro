@@ -11,9 +11,24 @@ interface Props {
   backHref: string;
   backLabel: string;
   alternates?: Partial<Record<Locale, string>>;
+  heroImage?: string;
+  structuredData?: Record<string, unknown>;
+  ogType?: 'website' | 'article';
 }
 
-const { locale, title, description, pubDate, eyebrow, backHref, backLabel, alternates } = Astro.props;
+const {
+  locale,
+  title,
+  description,
+  pubDate,
+  eyebrow,
+  backHref,
+  backLabel,
+  alternates,
+  heroImage,
+  structuredData,
+  ogType = 'website',
+} = Astro.props;
 const dateLabel = pubDate.toLocaleDateString(locale === 'es' ? 'es-MX' : 'en-US', {
   year: 'numeric',
   month: 'long',
@@ -22,7 +37,15 @@ const dateLabel = pubDate.toLocaleDateString(locale === 'es' ? 'es-MX' : 'en-US'
 const dateIso = pubDate.toISOString().slice(0, 10);
 ---
 
-<BaseLayout locale={locale} title={title} description={description} alternates={alternates}>
+<BaseLayout
+  locale={locale}
+  title={title}
+  description={description}
+  image={heroImage}
+  ogType={ogType}
+  alternates={alternates}
+  structuredData={structuredData}
+>
   <article class="doc section">
     <div class="container doc__inner">
       <a class="doc__back" href={backHref}>

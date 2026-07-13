@@ -1,0 +1,34 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import ProjectDetail from '@/features/projects/components/ProjectDetail.astro';
+import { SITE } from '@/data/seo';
+import { getProjectAlternates } from '@/features/projects/lib/project-path';
+import { getProjectStructuredData } from '@/features/projects/lib/project-seo';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const locale = 'es';
+const copy = project.data.copy[locale];
+const firstImage = project.data.media[0];
+const image = firstImage ? `${SITE}${firstImage.src}` : undefined;
+---
+
+<BaseLayout
+  locale={locale}
+  title={copy.name ?? project.data.name}
+  description={copy.desc}
+  image={image}
+  alternates={getProjectAlternates(project.id)}
+  structuredData={getProjectStructuredData(project, locale)}
+>
+  <ProjectDetail project={project} locale={locale} />
+</BaseLayout>

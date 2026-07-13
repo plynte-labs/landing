@@ -7,6 +7,19 @@ const localizedCopy = z.object({
   desc: z.string(),
 });
 
+const localizedMediaText = z.object({
+  es: z.string().min(1),
+  en: z.string().min(1),
+});
+
+const projectMedia = z.object({
+  src: z.string().regex(/^\/projects\/[a-z0-9-]+\/.+/, 'Project media must live under /projects/<slug>/'),
+  width: z.number().int().positive(),
+  height: z.number().int().positive(),
+  alt: localizedMediaText,
+  caption: localizedMediaText.optional(),
+});
+
 // Structured project data + localized name/desc per locale. Reconciles the old
 // orgData.ts fields with the longer ecosystem.<key> marketing copy.
 const projects = defineCollection({
@@ -17,6 +30,7 @@ const projects = defineCollection({
     github: z.string().url().optional(),
     website: z.string().url().optional(),
     tech: z.array(z.string()),
+    media: z.array(projectMedia).default([]),
     order: z.number().default(0),
     featured: z.boolean().default(false),
     name: z.string(),

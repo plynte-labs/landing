@@ -13,10 +13,12 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  ogType?: 'website' | 'article';
   alternates?: Partial<Record<Locale, string>>;
+  structuredData?: Record<string, unknown>;
 }
 
-const { locale, title, description, image, alternates } = Astro.props;
+const { locale, title, description, image, ogType, alternates, structuredData } = Astro.props;
 const skipLabel = locale === 'es' ? 'Saltar al contenido' : 'Skip to content';
 ---
 
@@ -42,8 +44,8 @@ const skipLabel = locale === 'es' ? 'Saltar al contenido' : 'Skip to content';
       })();
     </script>
 
-    <SEO locale={locale} title={title} description={description} image={image} alternates={alternates} />
-    <JsonLd />
+    <SEO locale={locale} title={title} description={description} image={image} ogType={ogType} alternates={alternates} />
+    {structuredData ? <JsonLd data={structuredData} /> : <JsonLd />}
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />

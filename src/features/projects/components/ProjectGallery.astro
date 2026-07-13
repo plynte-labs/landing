@@ -1,0 +1,424 @@
+---
+import type { Locale } from '@/i18n/ui';
+import type { ProjectMedia } from '@/features/projects/types';
+import ProjectMediaPlaceholder from '@/features/projects/components/ProjectMediaPlaceholder.astro';
+
+interface Props {
+  projectId: string;
+  projectName: string;
+  media: ProjectMedia[];
+  locale: Locale;
+}
+
+const { projectId, projectName, media, locale } = Astro.props;
+const galleryId = `project-gallery-${projectId}`;
+const labels = locale === 'es'
+  ? {
+      gallery: `Galer\u00eda de ${projectName}`,
+      carousel: 'carrusel',
+      slide: 'diapositiva',
+      previous: 'Mostrar imagen anterior',
+      next: 'Mostrar imagen siguiente',
+      show: 'Mostrar imagen',
+      status: 'Imagen {current} de {total}',
+    }
+  : {
+      gallery: `${projectName} gallery`,
+      carousel: 'carousel',
+      slide: 'slide',
+      previous: 'Show previous image',
+      next: 'Show next image',
+      show: 'Show image',
+      status: 'Image {current} of {total}',
+    };
+---
+
+{
+  media.length === 0 ? (
+    <ProjectMediaPlaceholder projectName={projectName} locale={locale} />
+  ) : (
+    <plynte-project-gallery
+      class="project-gallery"
+      role="region"
+      aria-roledescription={labels.carousel}
+      aria-label={labels.gallery}
+      data-status-template={labels.status}
+    >
+      <div class:list={['project-gallery__viewport', { 'has-navigation': media.length > 1 }]}>
+        <ol
+          class="project-gallery__track"
+          id={galleryId}
+          tabindex={media.length > 1 ? 0 : undefined}
+          aria-label={media.length > 1 ? labels.gallery : undefined}
+        >
+          {media.map((item, index) => {
+            const caption = item.caption?.[locale];
+            return (
+              <li
+                class="project-gallery__slide"
+                data-gallery-slide
+                role="group"
+                aria-roledescription={labels.slide}
+                aria-label={`${index + 1} / ${media.length}`}
+              >
+                <figure class="project-gallery__figure">
+                  <div class="project-gallery__frame">
+                    <img
+                      src={item.src}
+                      width={item.width}
+                      height={item.height}
+                      alt={item.alt[locale]}
+                      loading={index === 0 ? 'eager' : 'lazy'}
+                      decoding="async"
+                    />
+                  </div>
+                  {caption && <figcaption>{caption}</figcaption>}
+                </figure>
+              </li>
+            );
+          })}
+        </ol>
+
+        {media.length > 1 && (
+          <div class="project-gallery__controls" data-gallery-controls hidden>
+            <button
+              class="project-gallery__previous"
+              type="button"
+              data-gallery-previous
+              aria-controls={galleryId}
+              aria-label={labels.previous}
+            >
+              <span aria-hidden="true">{'\u2190'}</span>
+            </button>
+
+            <div class="project-gallery__selectors" role="group" aria-label={labels.gallery}>
+              {media.map((_, index) => (
+                <button
+                  type="button"
+                  data-gallery-selector
+                  aria-controls={galleryId}
+                  aria-label={`${labels.show} ${index + 1}`}
+                  aria-pressed={index === 0 ? 'true' : 'false'}
+                >
+                  <span aria-hidden="true"></span>
+                </button>
+              ))}
+            </div>
+
+            <button
+              class="project-gallery__next"
+              type="button"
+              data-gallery-next
+              aria-controls={galleryId}
+              aria-label={labels.next}
+            >
+              <span aria-hidden="true">{'\u2192'}</span>
+            </button>
+
+            <p class="project-gallery__counter" aria-hidden="true" data-gallery-counter></p>
+            <p class="visually-hidden" aria-live="polite" aria-atomic="true" data-gallery-status></p>
+          </div>
+        )}
+      </div>
+    </plynte-project-gallery>
+  )
+}
+
+<style>
+  .project-gallery {
+    display: block;
+    min-width: 0;
+  }
+
+  .project-gallery__viewport {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    min-height: clamp(16rem, 30vw, 28rem);
+    overflow: hidden;
+    background:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+      #070a0d;
+    background-size: 32px 32px;
+    border: 1px solid var(--border-accent);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--elev-3), var(--ring-inset);
+  }
+
+  .project-gallery__track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 100%;
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scroll-behavior: smooth;
+    scroll-snap-type: inline mandatory;
+    scrollbar-color: var(--brand) #070a0d;
+    scrollbar-width: thin;
+  }
+
+  .project-gallery[data-ready='true'] .project-gallery__track {
+    overflow: hidden;
+    scroll-snap-type: none;
+  }
+
+  .project-gallery__track:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: -4px;
+  }
+
+  .project-gallery__slide {
+    min-width: 0;
+    height: 100%;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  .project-gallery__figure {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .project-gallery__frame {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    place-items: center;
+    overflow: hidden;
+  }
+
+  .project-gallery__frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  figcaption {
+    position: absolute;
+    z-index: 1;
+    inset: auto 0 0;
+    min-height: 5.5rem;
+    padding: var(--space-10) var(--space-6) var(--space-5);
+    background: linear-gradient(to top, rgba(3, 6, 8, 0.94), rgba(3, 6, 8, 0.62) 58%, transparent);
+    color: #e6ebef;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    line-height: var(--lh-snug);
+    pointer-events: none;
+  }
+
+  .has-navigation figcaption {
+    padding-inline: 4.5rem;
+    padding-bottom: 3.75rem;
+  }
+
+  .project-gallery__controls {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .project-gallery__controls[hidden],
+  :global(.no-js) .project-gallery__controls {
+    display: none;
+  }
+
+  .project-gallery__controls button {
+    display: inline-flex;
+    position: absolute;
+    min-width: 44px;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    background: rgba(7, 10, 13, 0.84);
+    border: 1px solid rgba(230, 235, 239, 0.42);
+    border-radius: var(--radius-pill);
+    color: #e6ebef;
+    cursor: pointer;
+    pointer-events: auto;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    transition:
+      color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      background var(--dur-base) var(--ease-out);
+  }
+
+  .project-gallery__controls button:hover {
+    background: rgba(22, 27, 34, 0.96);
+    border-color: var(--brand);
+    color: #ffffff;
+  }
+
+  .project-gallery__controls button:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .project-gallery__previous,
+  .project-gallery__next {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .project-gallery__previous {
+    left: var(--space-3);
+  }
+
+  .project-gallery__next {
+    right: var(--space-3);
+  }
+
+  .project-gallery__selectors {
+    position: absolute;
+    bottom: var(--space-3);
+    left: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-1);
+    transform: translateX(-50%);
+    pointer-events: auto;
+  }
+
+  .project-gallery__selectors button {
+    position: relative;
+    min-width: 44px;
+    min-height: 44px;
+    background: transparent;
+    border-color: transparent;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .project-gallery__selectors button span {
+    width: 8px;
+    height: 8px;
+    background: #93a1ae;
+    border-radius: var(--radius-pill);
+  }
+
+  .project-gallery__selectors button[aria-pressed='true'] {
+    border-color: rgba(127, 230, 160, 0.6);
+    background: rgba(7, 10, 13, 0.72);
+  }
+
+  .project-gallery__selectors button[aria-pressed='true'] span {
+    background: var(--brand);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 18%, transparent);
+  }
+
+  .project-gallery__counter {
+    position: absolute;
+    top: var(--space-3);
+    right: var(--space-3);
+    padding: var(--space-2) var(--space-3);
+    background: rgba(7, 10, 13, 0.84);
+    border: 1px solid rgba(230, 235, 239, 0.3);
+    border-radius: var(--radius-pill);
+    color: #e6ebef;
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    line-height: 1;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  @media (max-width: 640px) {
+    .project-gallery__viewport {
+      aspect-ratio: 4 / 3;
+      min-height: 0;
+    }
+
+    .has-navigation figcaption {
+      padding-inline: var(--space-5);
+      padding-bottom: 3.75rem;
+    }
+
+    .project-gallery__previous {
+      left: var(--space-2);
+    }
+
+    .project-gallery__next {
+      right: var(--space-2);
+    }
+  }
+</style>
+
+<script>
+  class PlynteProjectGallery extends HTMLElement {
+    connectedCallback() {
+      if (this.dataset.ready === 'true') return;
+      this.dataset.ready = 'true';
+
+      const slides = Array.from(this.querySelectorAll<HTMLElement>('[data-gallery-slide]'));
+      if (slides.length <= 1) return;
+
+      const controls = this.querySelector<HTMLElement>('[data-gallery-controls]');
+      const keyboardSurface = this.querySelector<HTMLElement>('.project-gallery__viewport');
+      const previous = this.querySelector<HTMLButtonElement>('[data-gallery-previous]');
+      const next = this.querySelector<HTMLButtonElement>('[data-gallery-next]');
+      const selectors = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-gallery-selector]'));
+      const status = this.querySelector<HTMLElement>('[data-gallery-status]');
+      const counter = this.querySelector<HTMLElement>('[data-gallery-counter]');
+      const statusTemplate = this.dataset.statusTemplate ?? 'Image {current} of {total}';
+      let current = 0;
+
+      const show = (requestedIndex: number, announce = true) => {
+        current = (requestedIndex + slides.length) % slides.length;
+
+        slides.forEach((slide, index) => {
+          const active = index === current;
+          slide.toggleAttribute('hidden', !active);
+          if (active) slide.removeAttribute('aria-hidden');
+          else slide.setAttribute('aria-hidden', 'true');
+        });
+
+        selectors.forEach((selector, index) => {
+          selector.setAttribute('aria-pressed', String(index === current));
+        });
+
+        if (counter) counter.textContent = `${current + 1} / ${slides.length}`;
+
+        if (status) {
+          status.setAttribute('aria-live', announce ? 'polite' : 'off');
+          status.textContent = statusTemplate
+            .replace('{current}', String(current + 1))
+            .replace('{total}', String(slides.length));
+        }
+      };
+
+      controls?.removeAttribute('hidden');
+      show(0, false);
+
+      previous?.addEventListener('click', () => show(current - 1));
+      next?.addEventListener('click', () => show(current + 1));
+      selectors.forEach((selector, index) => selector.addEventListener('click', () => show(index)));
+
+      keyboardSurface?.addEventListener('keydown', (event) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          show(current - 1);
+        } else if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          show(current + 1);
+        } else if (event.key === 'Home') {
+          event.preventDefault();
+          show(0);
+        } else if (event.key === 'End') {
+          event.preventDefault();
+          show(slides.length - 1);
+        }
+      });
+    }
+  }
+
+  if (!customElements.get('plynte-project-gallery')) {
+    customElements.define('plynte-project-gallery', PlynteProjectGallery);
+  }
+</script>

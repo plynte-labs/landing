@@ -8,12 +8,13 @@ interface Props {
   title?: string;
   description?: string;
   image?: string;
+  ogType?: 'website' | 'article';
   /** Explicit cross-locale paths. Use for content pages whose translated slug
    *  may differ or be missing; omit a locale to suppress its hreflang. */
   alternates?: Partial<Record<Locale, string>>;
 }
 
-const { locale, title, description, image, alternates } = Astro.props;
+const { locale, title, description, image, ogType = 'website', alternates } = Astro.props;
 const t = useTranslations(locale);
 
 // Canonical, trailing-slash-free paths (home -> ''), so canonical, hreflang and
@@ -47,7 +48,7 @@ const canonical = `${SITE}${pathname}`;
 {xDefault && <link rel="alternate" hreflang="x-default" href={xDefault} />}
 
 <!-- Open Graph -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={ogType} />
 <meta property="og:url" content={canonical} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={pageDescription} />

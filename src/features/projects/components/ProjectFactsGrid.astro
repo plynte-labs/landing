@@ -1,0 +1,247 @@
+---
+import type { Locale } from '@/i18n/ui';
+import type { ProjectEntry } from '@/features/projects/types';
+
+interface Props {
+  project: ProjectEntry;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const isLive = project.data.status === 'live';
+const labels = locale === 'es'
+  ? {
+      eyebrow: 'Ficha técnica',
+      heading: 'Señales del proyecto',
+      stack: 'Base tecnológica',
+      stackHint: 'Tecnologías declaradas por el proyecto.',
+      status: 'Estado público',
+      live: 'Activo',
+      soon: 'Próximamente',
+      references: 'Referencias verificables',
+      referencesHint: 'Fuentes oficiales para consultar el proyecto.',
+      repository: 'Repositorio de GitHub',
+      website: 'Sitio oficial',
+    }
+  : {
+      eyebrow: 'Project facts',
+      heading: 'Project signals',
+      stack: 'Technical foundation',
+      stackHint: 'Technologies declared by the project.',
+      status: 'Public status',
+      live: 'Live',
+      soon: 'Coming soon',
+      references: 'Verifiable references',
+      referencesHint: 'Official sources for the project.',
+      repository: 'GitHub repository',
+      website: 'Official website',
+    };
+---
+
+<section class="project-facts section" aria-labelledby="project-facts-heading">
+  <div class="container container--wide">
+    <p class="eyebrow">{labels.eyebrow}</p>
+    <h2 id="project-facts-heading">{labels.heading}</h2>
+
+    <div class="project-facts__grid">
+      <article class="project-facts__card is-stack" data-reveal>
+        <span class="project-facts__index" aria-hidden="true">01</span>
+        <h3>{labels.stack}</h3>
+        <p>{labels.stackHint}</p>
+        <ul aria-label={labels.stack}>
+          {project.data.tech.map((technology) => <li>{technology}</li>)}
+        </ul>
+      </article>
+
+      <article class="project-facts__card is-status" data-reveal>
+        <span class="project-facts__index" aria-hidden="true">02</span>
+        <h3>{labels.status}</h3>
+        <p class="project-facts__status">
+          <span class:list={['project-facts__dot', isLive ? 'is-live' : 'is-soon']} aria-hidden="true"></span>
+          {isLive ? labels.live : labels.soon}
+        </p>
+      </article>
+
+      <article class="project-facts__card is-references" data-reveal>
+        <span class="project-facts__index" aria-hidden="true">03</span>
+        <h3>{labels.references}</h3>
+        <p>{labels.referencesHint}</p>
+        <ul>
+          {project.data.github && (
+            <li><a href={project.data.github} target="_blank" rel="noopener noreferrer">{labels.repository}<span aria-hidden="true">↗</span></a></li>
+          )}
+          {project.data.website && (
+            <li><a href={project.data.website} target="_blank" rel="noopener noreferrer">{labels.website}<span aria-hidden="true">↗</span></a></li>
+          )}
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-facts {
+    padding-top: var(--space-4);
+  }
+
+  h2 {
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-5);
+    font-size: var(--fs-2xl);
+  }
+
+  .project-facts__grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: var(--space-4);
+  }
+
+  .project-facts__card {
+    position: relative;
+    display: flex;
+    min-height: 20rem;
+    flex-direction: column;
+    gap: var(--space-4);
+    overflow: hidden;
+    padding: var(--space-4);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--ring-inset);
+  }
+
+  .project-facts__card::after {
+    content: '';
+    position: absolute;
+    right: -3rem;
+    bottom: -3rem;
+    width: 9rem;
+    aspect-ratio: 1;
+    border: 1px solid var(--border-subtle);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .project-facts__card.is-stack {
+    grid-column: span 1;
+    background:
+      linear-gradient(135deg, color-mix(in srgb, var(--brand) 7%, transparent), transparent 58%),
+      var(--surface);
+    border-color: var(--border-accent);
+  }
+
+  .project-facts__card.is-status {
+    grid-column: span 1;
+  }
+
+  .project-facts__card.is-references {
+    grid-column: span 1;
+  }
+
+  .project-facts__index {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+  }
+
+  h3 {
+    max-width: 18ch;
+    font-size: var(--fs-xl);
+  }
+
+  .project-facts__card p {
+    color: var(--text-secondary);
+  }
+
+  .project-facts__card.is-stack ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-top: auto;
+  }
+
+  .project-facts__card.is-stack li {
+    padding: var(--space-2) var(--space-3);
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xs);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
+  .project-facts__status {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: var(--fs-sm);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  .project-facts__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-pill);
+  }
+
+  .project-facts__dot.is-live {
+    background: var(--brand);
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 20%, transparent);
+  }
+
+  .project-facts__dot.is-soon {
+    border: 1.5px solid var(--warning);
+  }
+
+  .project-facts__card.is-references ul {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-top: auto;
+  }
+
+  .project-facts__card.is-references a {
+    display: inline-flex;
+    width: 100%;
+    min-height: 44px;
+    align-items: center;
+    gap: var(--space-2);
+    padding-inline: var(--space-4);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--brand-text);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+  }
+
+  .project-facts__card.is-references a:hover {
+    border-color: var(--border-accent);
+    color: var(--text);
+  }
+
+  @media (max-width: 760px) {
+    .project-facts__card.is-stack,
+    .project-facts__card.is-status,
+    .project-facts__card.is-references {
+      grid-column: 1 / -1;
+    }
+
+    .project-facts__card.is-references {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .project-facts__card.is-references ul,
+    .project-facts__card.is-references li,
+    .project-facts__card.is-references a {
+      width: 100%;
+    }
+  }
+</style>
+
+

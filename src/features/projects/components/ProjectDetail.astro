@@ -1,0 +1,145 @@
+---
+import { getCollection } from "astro:content";
+import type { Locale } from "@/i18n/ui";
+import type { ProjectEntry } from "@/features/projects/types";
+
+import ProjectHero from "@/features/projects/components/ProjectHero.astro";
+import ProjectGallery from "@/features/projects/components/ProjectGallery.astro";
+import ProjectFactsGrid from "@/features/projects/components/ProjectFactsGrid.astro";
+import ProjectCard from "@/features/projects/components/ProjectCard.astro";
+import CollectionIndex from "@/components/CollectionIndex.astro";
+
+interface Props {
+  project: ProjectEntry;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+
+const newsCopy = {
+  es: {
+    heading: "Novedades",
+    emptyLabel: "Todavía no hay novedades.",
+  },
+  en: {
+    heading: "News",
+    emptyLabel: "There are no updates yet.",
+  },
+} satisfies Record<
+  Locale,
+  {
+    heading: string;
+    emptyLabel: string;
+  }
+>;
+
+const newsText = newsCopy[locale];
+
+const projectName = project.data.copy[locale].name ?? project.data.name;
+
+/**
+ * Obtiene todos los proyectos, excluye el actual
+ * y respeta el orden configurado en la colección.
+ */
+const relatedProjects = (await getCollection("projects"))
+  .filter((entry) => entry.id !== project.id)
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<article class="project-detail">
+  <ProjectHero project={project} locale={locale}>
+    <ProjectGallery
+      projectId={project.id}
+      projectName={projectName}
+      media={project.data.media}
+      locale={locale}
+    />
+  </ProjectHero>
+
+  <ProjectFactsGrid project={project} locale={locale} />
+
+  {
+    relatedProjects.length > 0 && (
+      <section
+        class="related-projects"
+        aria-labelledby="related-projects-heading"
+      >
+        <div class="container">
+          <p class="eyebrow">{locale === "es" ? "Ecosistema" : "Ecosystem"}</p>
+
+          <h2 id="related-projects-heading" class="related-projects__heading">
+            {locale === "es" ? "Otros proyectos" : "Other projects"}
+          </h2>
+
+          <ul class="ecosystem__grid">
+            {relatedProjects.map((relatedProject) => (
+              <ProjectCard
+                project={relatedProject}
+                locale={locale}
+                variant="related"
+              />
+            ))}
+          </ul>
+        </div>
+      </section>
+    )
+  }
+
+  <CollectionIndex
+    locale={locale}
+    collection="news"
+    heading={newsText.heading}
+    eyebrow="Blog"
+    emptyLabel={newsText.emptyLabel}
+  />
+</article>
+
+<style>
+  .project-detail {
+    position: relative;
+    isolation: isolate;
+  }
+
+  .project-detail::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: 8rem;
+    left: 50%;
+    width: min(80vw, 70rem);
+    height: 30rem;
+    transform: translateX(-50%);
+    background: radial-gradient(
+      ellipse,
+      color-mix(in srgb, var(--brand) 8%, transparent),
+      transparent 66%
+    );
+    pointer-events: none;
+  }
+
+  .related-projects {
+    padding-block: var(--space-16);
+  }
+
+  .related-projects__heading {
+    margin-top: var(--space-3);
+    margin-bottom: var(--space-10);
+    font-size: var(--fs-2xl);
+  }
+
+  .ecosystem__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+    gap: var(--space-6);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 640px) {
+    .ecosystem__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
