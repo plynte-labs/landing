@@ -5,7 +5,11 @@
     "name": "Brick Draw",
     "status": "live",
     "github": "https://github.com/plynte-labs/brick-draw",
-    "tech": ["TypeScript", "Canvas", "React"],
+    "tech": [
+      "TypeScript",
+      "Canvas",
+      "React"
+    ],
     "order": 1,
     "featured": true,
     "copy": {
@@ -17,7 +21,22 @@
         "name": "Brick Draw",
         "desc": "High-performance drawing app built with TypeScript, Canvas, and React. Designed for artists and streamers who need fast, frictionless tools."
       }
-    }
+    },
+    "media": [
+      {
+        "src": "/projects/brick-draw/brickdraw-demo.webp",
+        "width": 1915,
+        "height": 1012,
+        "alt": {
+          "es": "Captura de Brick Draw con el lienzo de dibujo y sus controles visibles",
+          "en": "Brick Draw screenshot showing the drawing canvas and visible controls"
+        },
+        "caption": {
+          "es": "Interfaz de dibujo de Brick Draw",
+          "en": "Brick Draw drawing interface"
+        }
+      }
+    ]
   },
   {
     "id": "liveaudio",
@@ -25,7 +44,12 @@
     "name": "LiveAudio",
     "status": "live",
     "github": "https://github.com/plynte-labs/LiveAudio",
-    "tech": ["Whisper", "Python", "Real-time"],
+    "website": "https://liveaudio.opencohost.com",
+    "tech": [
+      "Whisper",
+      "Python",
+      "Real-time"
+    ],
     "order": 2,
     "featured": false,
     "copy": {
@@ -37,7 +61,22 @@
         "name": "LiveAudio",
         "desc": "Local real-time ASR subtitles with Whisper, Python, OBS, and WebSocket integration. AI-driven audio infrastructure for live streaming."
       }
-    }
+    },
+    "media": [
+      {
+        "src": "/projects/liveaudio/liveaudio-ui.webp",
+        "width": 988,
+        "height": 617,
+        "alt": {
+          "es": "Captura de LiveAudio con la interfaz de transcripción de audio en tiempo real",
+          "en": "LiveAudio screenshot showing the real-time audio transcription interface"
+        },
+        "caption": {
+          "es": "Interfaz de LiveAudio",
+          "en": "LiveAudio interface"
+        }
+      }
+    ]
   },
   {
     "id": "opencohost",
@@ -45,7 +84,12 @@
     "name": "OpenCohost",
     "status": "coming-soon",
     "website": "https://www.opencohost.com",
-    "tech": ["Python", "Ollama", "Real-time", "YouTube/Twitch"],
+    "tech": [
+      "Python",
+      "Ollama",
+      "Real-time",
+      "YouTube/Twitch"
+    ],
     "order": 3,
     "featured": false,
     "copy": {
@@ -57,6 +101,47 @@
         "name": "OpenCohost",
         "desc": "Local voice assistant for streamers built with Python and Ollama. 100% local processing on your machine, YouTube/Twitch integration."
       }
-    }
+    },
+    "media": [
+      {
+        "src": "/projects/opencohost/opencohost-customtkinter.webp",
+        "width": 1916,
+        "height": 987,
+        "alt": {
+          "es": "Captura de OpenCohost con una interfaz de escritorio basada en CustomTkinter",
+          "en": "OpenCohost screenshot showing a desktop interface built with CustomTkinter"
+        },
+        "caption": {
+          "es": "Interfaz de escritorio de OpenCohost",
+          "en": "OpenCohost desktop interface"
+        }
+      },
+      {
+        "src": "/projects/opencohost/opencohost-tauri-welcome.webp",
+        "width": 1917,
+        "height": 1013,
+        "alt": {
+          "es": "Captura de la pantalla de bienvenida de OpenCohost en Tauri",
+          "en": "OpenCohost screenshot showing the Tauri welcome screen"
+        },
+        "caption": {
+          "es": "Pantalla de bienvenida de OpenCohost",
+          "en": "OpenCohost welcome screen"
+        }
+      },
+      {
+        "src": "/projects/opencohost/opencohost-tauri-demo.webp",
+        "width": 1918,
+        "height": 985,
+        "alt": {
+          "es": "Captura de OpenCohost en Tauri con la interfaz principal de la aplicación",
+          "en": "OpenCohost screenshot showing the main application interface in Tauri"
+        },
+        "caption": {
+          "es": "Interfaz principal de OpenCohost en Tauri",
+          "en": "OpenCohost main interface in Tauri"
+        }
+      }
+    ]
   }
 ]

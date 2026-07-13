@@ -1,0 +1,246 @@
+---
+import type { Locale } from '@/i18n/ui';
+import type { ProjectEntry } from '@/features/projects/types';
+import { localizePath } from '@/i18n/utils';
+
+interface Props {
+  project: ProjectEntry;
+  locale: Locale;
+}
+
+const { project, locale } = Astro.props;
+const copy = project.data.copy[locale];
+const isLive = project.data.status === 'live';
+const labels = locale === 'es'
+  ? {
+      breadcrumb: 'Ruta de navegaci\u00f3n',
+      projects: 'Proyectos',
+      live: 'Activo',
+      soon: 'Pr\u00f3ximamente',
+      github: 'Ver repositorio',
+      website: 'Visitar sitio web',
+    }
+  : {
+      breadcrumb: 'Breadcrumb',
+      projects: 'Projects',
+      live: 'Live',
+      soon: 'Coming soon',
+      github: 'View repository',
+      website: 'Visit website',
+    };
+const projectsHref = `${localizePath('/', locale)}#ecosystem`;
+---
+
+<header class="project-hero">
+  <div class="container container--wide">
+    <nav class="project-hero__breadcrumb" aria-label={labels.breadcrumb}>
+      <a href={projectsHref}>{labels.projects}</a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">{copy.name ?? project.data.name}</span>
+    </nav>
+
+    <div class="project-hero__layout">
+      <div class="project-hero__intro">
+        <div class="project-hero__heading">
+          <p class="project-hero__status">
+            <span class:list={['project-hero__dot', isLive ? 'is-live' : 'is-soon']} aria-hidden="true"></span>
+            {isLive ? labels.live : labels.soon}
+          </p>
+          <h1>{copy.name ?? project.data.name}</h1>
+        </div>
+
+        <div class="project-hero__summary">
+          <p>{copy.desc}</p>
+          <div class="project-hero__actions">
+            {project.data.github && (
+              <a class="project-hero__action is-primary" href={project.data.github} target="_blank" rel="noopener noreferrer">
+                {labels.github}<span aria-hidden="true">{'\u2197'}</span>
+              </a>
+            )}
+            {project.data.website && (
+              <a class="project-hero__action" href={project.data.website} target="_blank" rel="noopener noreferrer">
+                {labels.website}<span aria-hidden="true">{'\u2197'}</span>
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="project-hero__media" data-reveal>
+        <slot />
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .project-hero {
+    padding-block: var(--space-6) var(--space-8);
+  }
+
+  .project-hero__breadcrumb {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-6);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  .project-hero__breadcrumb a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    color: var(--brand-text);
+  }
+
+  .project-hero__breadcrumb a:hover {
+    color: var(--text);
+  }
+
+  .project-hero__layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+  }
+
+  .project-hero__layout > *,
+  .project-hero__heading,
+  .project-hero__summary {
+    min-width: 0;
+  }
+
+  .project-hero__intro {
+    display: flex;
+    flex: 1 1 100%;
+    align-items: flex-start;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    min-width: 0;
+  }
+
+  .project-hero__heading,
+  .project-hero__summary {
+    flex: 1 1 0;
+  }
+
+  .project-hero__heading {
+    min-width: 0;
+  }
+
+  .project-hero__status {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+    letter-spacing: var(--ls-label);
+    text-transform: uppercase;
+  }
+
+  .project-hero__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-pill);
+  }
+
+  .project-hero__dot.is-live {
+    background: var(--brand);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);
+  }
+
+  .project-hero__dot.is-soon {
+    border: 1.5px solid var(--warning);
+  }
+
+  h1 {
+    max-width: 100%;
+    font-size: clamp(2.75rem, 1.9rem + 2.35vw, 4.5rem);
+    line-height: var(--lh-tight);
+    letter-spacing: var(--ls-display);
+    overflow-wrap: anywhere;
+  }
+
+  .project-hero__summary {
+    display: grid;
+    gap: var(--space-5);
+  }
+
+  .project-hero__summary > p {
+    max-width: 52ch;
+    color: var(--text-secondary);
+    font-size: var(--fs-md);
+  }
+
+  .project-hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .project-hero__action {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    padding: var(--space-3) var(--space-5);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    color: var(--text-secondary);
+    font-size: var(--fs-sm);
+    font-weight: var(--fw-semibold);
+    transition:
+      color var(--dur-base) var(--ease-out),
+      border-color var(--dur-base) var(--ease-out),
+      background var(--dur-base) var(--ease-out);
+  }
+
+  .project-hero__action:hover {
+    border-color: var(--border-accent);
+    color: var(--text);
+  }
+
+  .project-hero__action.is-primary {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--text-on-brand);
+  }
+
+  .project-hero__action.is-primary:hover {
+    background: var(--brand-hover);
+    border-color: var(--brand-hover);
+    color: var(--text-on-brand);
+  }
+
+  .project-hero__media {
+    flex: 1 1 100%;
+    min-width: 0;
+    width: 100%;
+  }
+
+  @media (max-width: 900px) {
+    .project-hero__intro {
+      flex-direction: column;
+      gap: var(--space-5);
+    }
+
+    .project-hero__heading,
+    .project-hero__summary {
+      flex-basis: auto;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .project-hero__actions,
+    .project-hero__action {
+      width: 100%;
+    }
+  }
+</style>
