@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { Locale } from "@/i18n/ui";
 import type { ProjectEntry } from "@/features/projects/types";
 import { getProjectPath } from "@/features/projects/lib/project-path";
@@ -35,7 +36,7 @@ const techLabel = locale === "es" ? "Tecnologías" : "Tech stack";
     {
       project.data.media[0] && (
         <div class="project-card__media">
-          <img
+          <Image
             src={project.data.media[0].src}
             width={project.data.media[0].width}
             height={project.data.media[0].height}

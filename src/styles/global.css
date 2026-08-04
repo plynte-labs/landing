@@ -198,7 +198,6 @@ pre {
   transition:
     opacity var(--dur-slow) var(--ease-out),
     transform var(--dur-slow) var(--ease-out);
-  will-change: opacity, transform;
 }
 [data-reveal].is-visible {
   opacity: 1;
