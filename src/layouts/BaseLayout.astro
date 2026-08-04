@@ -52,13 +52,21 @@ const skipLabel = locale === 'es' ? 'Saltar al contenido' : 'Skip to content';
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
     />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      />
+    </noscript>
   </head>
   <body>
     <a class="skip-link" href="#main-content">{skipLabel}</a>
     <MaintainerBanner locale={locale} />
     <Navbar locale={locale} />
-    <main id="main-content" tabindex="-1">
+    <main id="main-content">
       <slot />
     </main>
     <Footer locale={locale} />
