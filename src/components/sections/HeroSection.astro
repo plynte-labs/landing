@@ -1,8 +1,10 @@
 ---
 import type { Locale } from '@/i18n/ui';
 import { useTranslations, localizePath } from '@/i18n/utils';
+import { Image } from 'astro:assets';
 import BlueprintLattice from '@/components/ui/BlueprintLattice.astro';
 import LinkButton from '@/components/ui/LinkButton.astro';
+import plynteLogo from '/public/Plynte.svg';
 
 interface Props {
   locale: Locale;
@@ -16,8 +18,8 @@ const labLabel = locale === 'es' ? 'Laboratorio de software open-source' : 'Open
 
 <section id="hero" class="hero" aria-labelledby="hero-title">
   <BlueprintLattice />
-  <div class="container hero__inner" data-reveal>
-    <img class="hero__logo" src="/plynte%20logo2.png" alt="Plynte Labs" width="104" height="104" />
+  <div class="container hero__inner">
+    <Image class="hero__logo" src={plynteLogo} alt="Plynte Labs" width={104} height={104} />
     <p class="hero__kicker">
       <span>{labLabel}</span>
       <span class="hero__badge">{t('hero.mitBadge')}</span>

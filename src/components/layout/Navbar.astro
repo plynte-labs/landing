@@ -1,8 +1,10 @@
 ---
+import { Image } from 'astro:assets';
 import type { Locale } from '@/i18n/ui';
 import { useTranslations, localizePath } from '@/i18n/utils';
 import { NAV_ITEMS } from '@/components/layout/navbar.config';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher.astro';
+import plynteLogo from '/public/Plynte.svg';
 
 interface Props {
   locale: Locale;
@@ -21,7 +23,7 @@ const toDark = locale === 'es' ? 'Cambiar a tema oscuro' : 'Switch to dark theme
 <header class="navbar glass" id="navbar">
   <nav class="container navbar__inner" aria-label={navLabel}>
     <a class="navbar__logo" href={homeBase} aria-label="Plynte Labs">
-      <img src="/Plynte.svg" alt="" width="32" height="32" />
+      <Image src={plynteLogo} alt="" width={32} height={32} />
       <span class="navbar__wordmark">Plynte<span class="navbar__wordmark-dim">Labs</span></span>
     </a>
 
