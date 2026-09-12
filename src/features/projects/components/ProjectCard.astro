@@ -12,22 +12,32 @@ interface Props {
 
 const { project, locale, variant = "default" } = Astro.props;
 const copy = project.data.copy[locale];
-const isLive = project.data.status === "live";
-const statusLabel = isLive
-  ? locale === "es"
-    ? "Activo"
-    : "Live"
-  : locale === "es"
-    ? "Próximamente"
-    : "Coming soon";
+const status = project.data.status;
+const isLive = status === "live";
+const isAlpha = status === "alpha";
+const statusLabel =
+  isLive
+    ? locale === "es"
+      ? "Activo"
+      : "Live"
+    : isAlpha
+      ? locale === "es"
+        ? "Alpha pública"
+        : "Public alpha"
+      : locale === "es"
+        ? "Próximamente"
+        : "Coming soon";
 const detailLabel = locale === "es" ? "Explorar proyecto" : "Explore project";
 const techLabel = locale === "es" ? "Tecnologías" : "Tech stack";
+// La card destacada vive above the fold: carga eager + prioridad alta (LCP).
+// El resto sigue lazy para no competir con el contenido visible.
+const isFeatured = project.data.featured && variant === "default";
 ---
 
 <li
   class:list={{
     "project-card-item": true,
-    "is-featured": project.data.featured && variant === "default",
+    "is-featured": isFeatured,
     "is-related": variant === "related",
   }}
   data-reveal
@@ -41,7 +51,8 @@ const techLabel = locale === "es" ? "Tecnologías" : "Tech stack";
             width={project.data.media[0].width}
             height={project.data.media[0].height}
             alt={project.data.media[0].alt[locale]}
-            loading="lazy"
+            loading={isFeatured ? "eager" : "lazy"}
+            fetchpriority={isFeatured ? "high" : undefined}
             decoding="async"
           />
         </div>
@@ -49,7 +60,7 @@ const techLabel = locale === "es" ? "Tecnologías" : "Tech stack";
     }
     <div class="project-card__status">
       <span
-        class:list={["project-card__dot", isLive ? "is-live" : "is-soon"]}
+        class:list={["project-card__dot", isLive ? "is-live" : isAlpha ? "is-alpha" : "is-soon"]}
         aria-hidden="true"></span>
       <span>{statusLabel}</span>
     </div>
@@ -156,7 +167,8 @@ const techLabel = locale === "es" ? "Tecnologías" : "Tech stack";
     border-radius: var(--radius-pill);
   }
 
-  .project-card__dot.is-live {
+  .project-card__dot.is-live,
+  .project-card__dot.is-alpha {
     background: var(--brand);
     box-shadow: 0 0 0 3px color-mix(in srgb, var(--brand) 22%, transparent);
   }

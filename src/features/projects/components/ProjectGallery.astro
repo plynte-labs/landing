@@ -13,6 +13,9 @@ interface Props {
 
 const { projectId, projectName, media, locale } = Astro.props;
 const galleryId = `project-gallery-${projectId}`;
+// OpenCohost son screenshots de app: se muestran completos (contain) en vez
+// de recortados (cover) para no cortar la UI.
+const fitContain = projectId === 'opencohost';
 const labels = locale === 'es'
   ? {
       gallery: `Galer\u00eda de ${projectName}`,
@@ -39,7 +42,7 @@ const labels = locale === 'es'
     <ProjectMediaPlaceholder projectName={projectName} locale={locale} />
   ) : (
     <plynte-project-gallery
-      class="project-gallery"
+      class:list={['project-gallery', { 'is-contain': fitContain }]}
       role="region"
       aria-roledescription={labels.carousel}
       aria-label={labels.gallery}
@@ -49,7 +52,6 @@ const labels = locale === 'es'
         <ol
           class="project-gallery__track"
           id={galleryId}
-          tabindex={media.length > 1 ? 0 : undefined}
           aria-label={media.length > 1 ? labels.gallery : undefined}
         >
           {media.map((item, index) => {
@@ -196,6 +198,10 @@ const labels = locale === 'es'
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .project-gallery.is-contain .project-gallery__frame img {
+    object-fit: contain;
   }
 
   figcaption {
@@ -361,7 +367,9 @@ const labels = locale === 'es'
       if (slides.length <= 1) return;
 
       const controls = this.querySelector<HTMLElement>('[data-gallery-controls]');
-      const keyboardSurface = this.querySelector<HTMLElement>('.project-gallery__viewport');
+      // El teclado se escucha en el host (this): los botones prev/next/selectores
+      // son elementos nativos enfocables, así que las flechas funcionan sin
+      // tabindex en elementos no interactivos (ol/div).
       const previous = this.querySelector<HTMLButtonElement>('[data-gallery-previous]');
       const next = this.querySelector<HTMLButtonElement>('[data-gallery-next]');
       const selectors = Array.from(this.querySelectorAll<HTMLButtonElement>('[data-gallery-selector]'));
@@ -401,7 +409,7 @@ const labels = locale === 'es'
       next?.addEventListener('click', () => show(current + 1));
       selectors.forEach((selector, index) => selector.addEventListener('click', () => show(index)));
 
-      keyboardSurface?.addEventListener('keydown', (event) => {
+      this.addEventListener('keydown', (event) => {
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
           show(current - 1);

@@ -10,8 +10,8 @@
       "Canvas",
       "React"
     ],
-    "order": 1,
-    "featured": true,
+    "order": 3,
+    "featured": false,
     "copy": {
       "es": {
         "name": "Brick Draw",
@@ -82,38 +82,57 @@
     "id": "opencohost",
     "key": "opencohost",
     "name": "OpenCohost",
-    "status": "coming-soon",
+    "status": "alpha",
+    "github": "https://github.com/plynte-labs/OpenCohost",
     "website": "https://www.opencohost.com",
+    "download": "https://github.com/plynte-labs/OpenCohost/releases/tag/v0.3.0-alpha.4",
+    "version": "0.3.0-alpha.4",
     "tech": [
       "Python",
+      "Tauri",
       "Ollama",
-      "Real-time",
-      "YouTube/Twitch"
+      "Piper TTS",
+      "LiveAudio STT",
+      "Twitch",
+      "OBS"
     ],
-    "order": 3,
-    "featured": false,
+    "order": 1,
+    "featured": true,
     "copy": {
       "es": {
         "name": "OpenCohost",
-        "desc": "Asistente de voz local para streamers construido con Python y Ollama. Procesamiento 100% en tu máquina, integración con YouTube/Twitch."
+        "desc": "Co-host de voz local-first para streamers: push-to-talk (usando LiveAudio), agenda, memoria por perfiles e integración con OBS y chat de Twitch."
       },
       "en": {
         "name": "OpenCohost",
-        "desc": "Local voice assistant for streamers built with Python and Ollama. 100% local processing on your machine, YouTube/Twitch integration."
+        "desc": "Local-first voice co-host for streamers: push-to-talk (via LiveAudio), agenda, per-profile memory, and OBS + Twitch chat integration."
       }
     },
     "media": [
       {
-        "src": "/projects/opencohost/opencohost-customtkinter.webp",
-        "width": 1916,
-        "height": 987,
+        "src": "/projects/opencohost/opencohost-tauri-kira.webp",
+        "width": 1917,
+        "height": 1016,
         "alt": {
-          "es": "Captura de OpenCohost con una interfaz de escritorio basada en CustomTkinter",
-          "en": "OpenCohost screenshot showing a desktop interface built with CustomTkinter"
+          "es": "Captura de OpenCohost en Tauri con Kira hablando y el chat de la sesión visible",
+          "en": "OpenCohost screenshot in Tauri showing Kira speaking with the session chat visible"
         },
         "caption": {
-          "es": "Interfaz de escritorio de OpenCohost",
-          "en": "OpenCohost desktop interface"
+          "es": "Interfaz principal de OpenCohost en Tauri",
+          "en": "OpenCohost main interface in Tauri"
+        }
+      },
+      {
+        "src": "/projects/opencohost/opencohost-tauri-demo.webp",
+        "width": 1918,
+        "height": 985,
+        "alt": {
+          "es": "Captura de OpenCohost en Tauri con la interfaz principal de la aplicación",
+          "en": "OpenCohost screenshot showing the main application interface in Tauri"
+        },
+        "caption": {
+          "es": "Interfaz principal de OpenCohost en Tauri",
+          "en": "OpenCohost main interface in Tauri"
         }
       },
       {
@@ -130,16 +149,16 @@
         }
       },
       {
-        "src": "/projects/opencohost/opencohost-tauri-demo.webp",
-        "width": 1918,
-        "height": 985,
+        "src": "/projects/opencohost/opencohost-customtkinter.webp",
+        "width": 1916,
+        "height": 987,
         "alt": {
-          "es": "Captura de OpenCohost en Tauri con la interfaz principal de la aplicación",
-          "en": "OpenCohost screenshot showing the main application interface in Tauri"
+          "es": "Interfaz histórica de OpenCohost en CustomTkinter (versión anterior, congelada)",
+          "en": "Historical OpenCohost interface in CustomTkinter (previous version, frozen)"
         },
         "caption": {
-          "es": "Interfaz principal de OpenCohost en Tauri",
-          "en": "OpenCohost main interface in Tauri"
+          "es": "Historia: interfaz anterior en CustomTkinter (congelada, sin nuevas funciones)",
+          "en": "History: previous CustomTkinter interface (frozen, no new features)"
         }
       }
     ]
