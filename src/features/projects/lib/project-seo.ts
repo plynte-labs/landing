@@ -10,7 +10,7 @@ function absoluteUrl(path: string): string {
 export function getProjectStructuredData(project: ProjectEntry, locale: Locale): Record<string, unknown> {
   const copy = project.data.copy[locale];
   const pageUrl = `${SITE}${getProjectPath(project.id, locale)}`;
-  const references = [project.data.github, project.data.website].filter((url): url is string => Boolean(url));
+  const references = [project.data.github, project.data.website, project.data.download].filter((url): url is string => Boolean(url));
   const firstImage = project.data.media[0];
 
   return {

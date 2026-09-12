@@ -26,9 +26,11 @@ const projects = defineCollection({
   loader: file('src/content/projects.json'),
   schema: z.object({
     key: z.string(),
-    status: z.enum(['live', 'coming-soon']),
+    status: z.enum(['live', 'alpha', 'coming-soon']),
     github: z.string().url().optional(),
     website: z.string().url().optional(),
+    download: z.string().url().optional(),
+    version: z.string().optional(),
     tech: z.array(z.string()),
     media: z.array(projectMedia).default([]),
     order: z.number().default(0),

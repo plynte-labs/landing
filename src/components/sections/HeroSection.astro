@@ -19,7 +19,7 @@ const labLabel = locale === 'es' ? 'Laboratorio de software open-source' : 'Open
 <section id="hero" class="hero" aria-labelledby="hero-title">
   <BlueprintLattice />
   <div class="container hero__inner">
-    <Image class="hero__logo" src={plynteLogo} alt="Plynte Labs" width={104} height={104} />
+    <Image class="hero__logo" src={plynteLogo} alt="Plynte Labs" width={104} height={104} loading="eager" />
     <p class="hero__kicker">
       <span>{labLabel}</span>
       <span class="hero__badge">{t('hero.mitBadge')}</span>

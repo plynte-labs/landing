@@ -66,7 +66,7 @@ export const ui: Record<Locale, TranslationDict> = {
       },
       opencohost: {
         name: 'OpenCohost',
-        desc: 'Asistente de voz local para streamers construido con Python y Ollama. Procesamiento 100% en tu máquina, integración con YouTube/Twitch.',
+        desc: 'Co-host de voz local-first para streamers: push-to-talk (usando LiveAudio), agenda, memoria por perfiles e integración con OBS y chat de Twitch.',
       },
       comingSoon: 'Próximamente',
       viewOnGithub: 'Ver en GitHub',
@@ -157,7 +157,7 @@ export const ui: Record<Locale, TranslationDict> = {
       },
       opencohost: {
         name: 'OpenCohost',
-        desc: 'Local voice assistant for streamers built with Python and Ollama. 100% local processing on your machine, YouTube/Twitch integration.',
+        desc: 'Local-first voice co-host for streamers: push-to-talk (via LiveAudio), agenda, per-profile memory, and OBS + Twitch chat integration.',
       },
       comingSoon: 'Coming Soon',
       viewOnGithub: 'View on GitHub',

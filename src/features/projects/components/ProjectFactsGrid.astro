@@ -8,7 +8,9 @@ interface Props {
 }
 
 const { project, locale } = Astro.props;
-const isLive = project.data.status === 'live';
+const status = project.data.status;
+const isLive = status === 'live';
+const isAlpha = status === 'alpha';
 const labels = locale === 'es'
   ? {
       eyebrow: 'Ficha técnica',
@@ -17,11 +19,14 @@ const labels = locale === 'es'
       stackHint: 'Tecnologías declaradas por el proyecto.',
       status: 'Estado público',
       live: 'Activo',
+      alpha: 'Alpha pública',
       soon: 'Próximamente',
       references: 'Referencias verificables',
       referencesHint: 'Fuentes oficiales para consultar el proyecto.',
       repository: 'Repositorio de GitHub',
       website: 'Sitio oficial',
+      download: 'Descargar alpha pública',
+      version: 'Versión',
     }
   : {
       eyebrow: 'Project facts',
@@ -30,12 +35,16 @@ const labels = locale === 'es'
       stackHint: 'Technologies declared by the project.',
       status: 'Public status',
       live: 'Live',
+      alpha: 'Public alpha',
       soon: 'Coming soon',
       references: 'Verifiable references',
       referencesHint: 'Official sources for the project.',
       repository: 'GitHub repository',
       website: 'Official website',
+      download: 'Download public alpha',
+      version: 'Version',
     };
+const statusLabel = isLive ? labels.live : isAlpha ? labels.alpha : labels.soon;
 ---
 
 <section class="project-facts section" aria-labelledby="project-facts-heading">
@@ -57,9 +66,12 @@ const labels = locale === 'es'
         <span class="project-facts__index" aria-hidden="true">02</span>
         <h3>{labels.status}</h3>
         <p class="project-facts__status">
-          <span class:list={['project-facts__dot', isLive ? 'is-live' : 'is-soon']} aria-hidden="true"></span>
-          {isLive ? labels.live : labels.soon}
+          <span class:list={['project-facts__dot', isLive ? 'is-live' : isAlpha ? 'is-alpha' : 'is-soon']} aria-hidden="true"></span>
+          {statusLabel}
         </p>
+        {project.data.version && (
+          <p class="project-facts__version">{labels.version}: {project.data.version}</p>
+        )}
       </article>
 
       <article class="project-facts__card is-references" data-reveal>
@@ -67,6 +79,9 @@ const labels = locale === 'es'
         <h3>{labels.references}</h3>
         <p>{labels.referencesHint}</p>
         <ul>
+          {project.data.download && (
+            <li><a href={project.data.download} target="_blank" rel="noopener noreferrer">{labels.download}<span aria-hidden="true">↗</span></a></li>
+          )}
           {project.data.github && (
             <li><a href={project.data.github} target="_blank" rel="noopener noreferrer">{labels.repository}<span aria-hidden="true">↗</span></a></li>
           )}
@@ -182,13 +197,20 @@ const labels = locale === 'es'
     text-transform: uppercase;
   }
 
+  .project-facts__version {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: var(--fs-xs);
+  }
+
   .project-facts__dot {
     width: 10px;
     height: 10px;
     border-radius: var(--radius-pill);
   }
 
-  .project-facts__dot.is-live {
+  .project-facts__dot.is-live,
+  .project-facts__dot.is-alpha {
     background: var(--brand);
     box-shadow: 0 0 0 4px color-mix(in srgb, var(--brand) 20%, transparent);
   }
